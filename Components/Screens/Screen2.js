@@ -1,36 +1,35 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { AppText } from "../fontPoppins";
+import { AppText } from "../../fontPoppins";
 
-const Screen1 = () => {
+
+const Screen2 = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={require("./Logo.png")} style={styles.image} />
+        <Image source={require("../Logo.png")} style={styles.image} />
       </View>
       <View style={styles.DocContainer}>
         <View style={styles.headingOutter}>
-          <AppText style={styles.heading}>ASK & REFLECT</AppText>
+          <Text style={styles.heading}>Time & Truth</Text>
         </View>
         <View style={styles.textContainer}>
           <AppText style={styles.text}>
-            This experience is about meaningful connection. Instead of speaking,
-            you’ll ask and answer deep, thought-provoking questions—one at a
-            time.
+            Each response has a timer—set the time, and let the moment unfold.
+            The countdown isn’t a rush; it’s an invitation to pause, think, and
+            express yourself fully.
           </AppText>
           <AppText style={styles.text}>
-            Write your question, pass the phone, and give space for reflection.
-            Be intentional. The right question can open doors to understanding,
-            vulnerability, and shared wisdom.
+            Be present. Thoughtful answers lead to unforgettable moments.
           </AppText>
         </View>
       </View>
       <View style={styles.NextOutter}>
         <View style={styles.NextContainer}>
-          <Pressable onPress={() => navigation.navigate("Screen2")}>
+          <Pressable onPress={() => navigation.navigate("Screen3")}>
             <AppText style={styles.NextBTN}>Next</AppText>
           </Pressable>
         </View>
@@ -103,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Screen1;
+export default Screen2;

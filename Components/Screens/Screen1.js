@@ -1,35 +1,36 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { AppText } from "../fontPoppins";
+import { AppText } from "../../fontPoppins";
 
-const Screen3 = () => {
+const Screen1 = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={require("./Logo.png")} style={styles.image} />
+        <Image source={require("../Logo.png")} style={styles.image} />
       </View>
       <View style={styles.DocContainer}>
         <View style={styles.headingOutter}>
-          <AppText style={styles.heading}>A Memory to Keep</AppText>
+          <AppText style={styles.heading}>ASK & REFLECT</AppText>
         </View>
         <View style={styles.textContainer}>
           <AppText style={styles.text}>
-            Every exchange is saved as a beautifully formatted letter—a keepsake
-            of your shared conversation. These memories remain private but can
-            be shared within the app by invitation.
+            This experience is about meaningful connection. Instead of speaking,
+            you’ll ask and answer deep, thought-provoking questions—one at a
+            time.
           </AppText>
           <AppText style={styles.text}>
-            Be sincere. The words you write today may become a treasured memory
-            tomorrow.
+            Write your question, pass the phone, and give space for reflection.
+            Be intentional. The right question can open doors to understanding,
+            vulnerability, and shared wisdom.
           </AppText>
         </View>
       </View>
       <View style={styles.NextOutter}>
         <View style={styles.NextContainer}>
-          <Pressable onPress={() => navigation.navigate("NameInput")}>
+          <Pressable onPress={() => navigation.navigate("Screen2")}>
             <AppText style={styles.NextBTN}>Next</AppText>
           </Pressable>
         </View>
@@ -102,4 +103,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Screen3;
+export default Screen1;

@@ -1,35 +1,35 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { AppText } from "../fontPoppins";
+import { AppText } from "../../fontPoppins";
 
-
-const Screen2 = () => {
+const Screen3 = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={require("./Logo.png")} style={styles.image} />
+        <Image source={require("../Logo.png")} style={styles.image} />
       </View>
       <View style={styles.DocContainer}>
         <View style={styles.headingOutter}>
-          <Text style={styles.heading}>Time & Truth</Text>
+          <AppText style={styles.heading}>A Memory to Keep</AppText>
         </View>
         <View style={styles.textContainer}>
           <AppText style={styles.text}>
-            Each response has a timer—set the time, and let the moment unfold.
-            The countdown isn’t a rush; it’s an invitation to pause, think, and
-            express yourself fully.
+            Every exchange is saved as a beautifully formatted letter—a keepsake
+            of your shared conversation. These memories remain private but can
+            be shared within the app by invitation.
           </AppText>
           <AppText style={styles.text}>
-            Be present. Thoughtful answers lead to unforgettable moments.
+            Be sincere. The words you write today may become a treasured memory
+            tomorrow.
           </AppText>
         </View>
       </View>
       <View style={styles.NextOutter}>
         <View style={styles.NextContainer}>
-          <Pressable onPress={() => navigation.navigate("Screen3")}>
+          <Pressable onPress={() => navigation.navigate("NameInput")}>
             <AppText style={styles.NextBTN}>Next</AppText>
           </Pressable>
         </View>
@@ -102,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Screen2;
+export default Screen3;

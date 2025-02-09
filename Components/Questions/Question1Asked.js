@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { View, Pressable, Image, StyleSheet, TextInput } from "react-native";
+import { View, Pressable, Image, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { AppText } from "../fontPoppins";
-import { GlobalContext } from "../context";
+import { AppText } from "../../fontPoppins";
+import { GlobalContext } from "../../context";
 
-const Answer1 = () => {
-  const { answer, setAnswer, seconds, stopTimer } = useContext(GlobalContext);
+const Question1Asked = () => {
+  const { question, seconds } = useContext(GlobalContext);
   const navigation = useNavigation();
 
   const formatTime = () => {
@@ -17,19 +17,15 @@ const Answer1 = () => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={require("./Logo.png")} style={styles.image} />
+        <Image source={require("../Logo.png")} style={styles.image} />
       </View>
-      <View style={styles.Answer}>
+      <View style={styles.askQuestion}>
         <View style={styles.headingOutter}>
-          <AppText style={styles.heading}>ANSWER #1</AppText>
-          <View style={styles.InputContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="ANSWER"
-              value={answer}
-              onChangeText={setAnswer}
-              multiline={true}
-            />
+          <AppText style={styles.heading}>QUESTION #1</AppText>
+          <View style={styles.QuestionContainer}>
+            <AppText style={styles.Question}>
+              {question || "What is your question?"}
+            </AppText>
           </View>
         </View>
         <View style={styles.timerContainer}>
@@ -37,16 +33,14 @@ const Answer1 = () => {
           <AppText style={styles.timer}>{formatTime()}</AppText>
         </View>
       </View>
-      <View style={styles.SubmitOutter}>
-        <View style={styles.SubmitContainer}>
+      <View style={styles.RespondOutter}>
+        <View style={styles.RespondContainer}>
           <Pressable
             onPress={() => {
-              stopTimer();
-              console.log(answer);
-              navigation.navigate("FrontPage");
+              navigation.navigate("Answer1");
             }}
           >
-            <AppText style={styles.SubmitBTN}>SUBMIT</AppText>
+            <AppText style={styles.RespondBTN}>Respond</AppText>
           </Pressable>
         </View>
       </View>
@@ -70,11 +64,12 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
   },
-  Answer: {
+  askQuestion: {
     width: 321,
     justifyContent: "center",
     alignItems: "center",
     height: "50%",
+    gap: 40,
   },
   headingOutter: {
     alignItems: "center",
@@ -85,28 +80,18 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     lineHeight: 41.76,
   },
-  InputContainer: {
-    width: 321,
-    height: 280,
-  },
-  input: {
-    width: "100%",
-    height: 252,
-    borderColor: "#D0AC7B80",
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 10,
+  QuestionContainer: { width: 240, height: "30%" },
+
+  Question: {
     fontSize: 24,
     fontWeight: "400",
     lineHeight: 36,
     color: "#D0AC7B",
-    textAlign: "justify",
-    textAlignVertical: "top",
-    overflow: "hidden",
-    paddingHorizontal: 25,
-    paddingVertical: 25,
+    textAlign: "center",
+    width: 240,
+    height: 144,
+    justifyContent:"center",
   },
-
   timerContainer: {
     width: "100%",
     height: "30%",
@@ -120,12 +105,12 @@ const styles = StyleSheet.create({
   timer: {
     fontSize: 58,
   },
-  SubmitOutter: {
+  RespondOutter: {
     height: "20%",
     width: "100%",
     alignItems: "center",
   },
-  SubmitContainer: {
+  RespondContainer: {
     backgroundColor: "#D0AC7B",
     width: 240,
     height: 67,
@@ -133,7 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  SubmitBTN: {
+  RespondBTN: {
     fontSize: 24,
     textAlign: "center",
     fontWeight: "400",
@@ -141,4 +126,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Answer1;
+export default Question1Asked;

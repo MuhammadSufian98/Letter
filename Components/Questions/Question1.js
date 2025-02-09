@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { View, TextInput, StyleSheet, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { AppText } from "../fontPoppins";
-import { GlobalContext } from "../context";
+import { AppText } from "../../fontPoppins";
+import { GlobalContext } from "../../context";
 
 const Question1 = () => {
   const navigation = useNavigation();
@@ -12,14 +12,14 @@ const Question1 = () => {
   const handleAsk = () => {
     if (!isNaN(minutes) && minutes > 0) {
       startTimer(Number(minutes));
-      navigation.navigate("QuestionAsked");
+      navigation.navigate("Question1Asked");
     }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image source={require("./Logo.png")} style={styles.image} />
+        <Image source={require("../Logo.png")} style={styles.image} />
       </View>
       <View style={styles.askQuestion}>
         <View style={styles.headingOutter}>
