@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { AppText } from "../../fontPoppins";
+
 
 const FrontPage = () => {
   const [selected, setSelected] = useState("");
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -25,7 +29,7 @@ const FrontPage = () => {
               source={require("./united-states.png")}
               style={styles.langImage}
             />
-            <Text style={styles.text}>English</Text>
+            <AppText style={styles.text}>English</AppText>
           </Pressable>
         </View>
 
@@ -40,7 +44,7 @@ const FrontPage = () => {
             onPress={() => setSelected("Español")}
           >
             <Image source={require("./world.png")} style={styles.langImage} />
-            <Text style={styles.text}>Español</Text>
+            <AppText style={styles.text}>Español</AppText>
           </Pressable>
         </View>
       </View>
@@ -48,12 +52,12 @@ const FrontPage = () => {
         <View
           style={
             selected === "Español" || selected === "English"
-              ? styles.NextBTN
+              ? styles.NextContainer
               : { display: "none" }
           }
         >
-          <Pressable>
-            <Text style={styles.nextNext}>Next</Text>
+          <Pressable onPress={() => navigation.navigate("WelcomePage")}>
+            <AppText style={styles.NextBTN}>Next</AppText>
           </Pressable>
         </View>
       </View>
@@ -72,14 +76,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     margin: 10,
-    fontFamily: "Poppins",
     fontWeight: "400",
     color: "#D0AC7B",
   },
   imageContainer: {
     flexDirection: "column",
     justifyContent: "center",
-    height: "20%",
+    height: "30%",
   },
   image: {
     width: 70,
@@ -110,7 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    height: "30%",
+    paddingRight: 40,
   },
   langImage: {
     width: 40,
@@ -123,19 +126,18 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
   },
-  NextBTN: {
+  NextContainer: {
     backgroundColor: "#D0AC7B",
-    width: 267,
-    height: 77,
+    width: 240,
+    height: 67,
     borderRadius: 50,
     justifyContent: "center",
-    alignItems: "bottom",
+    alignItems: "center",
   },
-  nextNext: {
+  NextBTN: {
     fontSize: 24,
     textAlign: "center",
     margin: 10,
-    fontFamily: "Poppins",
     fontWeight: "400",
     color: "#FFFFFF",
   },
