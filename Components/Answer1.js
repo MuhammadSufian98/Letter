@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { View, Pressable, Image, StyleSheet } from "react-native";
+import { View, Pressable, Image, StyleSheet, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AppText } from "../fontPoppins";
 import { GlobalContext } from "../context";
 
-const QuestionAsked = () => {
-  const { question, seconds } = useContext(GlobalContext);
+const Answer1 = () => {
+  const { answer, setAnswer, seconds, stopTimer } = useContext(GlobalContext);
   const navigation = useNavigation();
 
   const formatTime = () => {
@@ -19,13 +19,17 @@ const QuestionAsked = () => {
       <View style={styles.imageContainer}>
         <Image source={require("./Logo.png")} style={styles.image} />
       </View>
-      <View style={styles.askQuestion}>
+      <View style={styles.Answer}>
         <View style={styles.headingOutter}>
-          <AppText style={styles.heading}>Question #1</AppText>
-          <View style={styles.QuestionContainer}>
-            <AppText style={styles.Question}>
-              {question || "What is your question?"}
-            </AppText>
+          <AppText style={styles.heading}>ANSWER #1</AppText>
+          <View style={styles.InputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="ANSWER"
+              value={answer}
+              onChangeText={setAnswer}
+              multiline={true}
+            />
           </View>
         </View>
         <View style={styles.timerContainer}>
@@ -33,14 +37,16 @@ const QuestionAsked = () => {
           <AppText style={styles.timer}>{formatTime()}</AppText>
         </View>
       </View>
-      <View style={styles.RespondOutter}>
-        <View style={styles.RespondContainer}>
+      <View style={styles.SubmitOutter}>
+        <View style={styles.SubmitContainer}>
           <Pressable
             onPress={() => {
-              navigation.navigate("Answer1");
+              stopTimer();
+              console.log(answer);
+              navigation.navigate("FrontPage");
             }}
           >
-            <AppText style={styles.RespondBTN}>Respond</AppText>
+            <AppText style={styles.SubmitBTN}>SUBMIT</AppText>
           </Pressable>
         </View>
       </View>
@@ -64,12 +70,11 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
   },
-  askQuestion: {
+  Answer: {
     width: 321,
     justifyContent: "center",
     alignItems: "center",
     height: "50%",
-    gap: 40,
   },
   headingOutter: {
     alignItems: "center",
@@ -80,18 +85,28 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     lineHeight: 41.76,
   },
-  QuestionContainer: { width: 240, height: "30%" },
-
-  Question: {
+  InputContainer: {
+    width: 321,
+    height: 280,
+  },
+  input: {
+    width: "100%",
+    height: 252,
+    borderColor: "#D0AC7B80",
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 10,
     fontSize: 24,
     fontWeight: "400",
     lineHeight: 36,
     color: "#D0AC7B",
-    textAlign: "center",
-    width: 240,
-    height: 144,
-    justifyContent:"center",
+    textAlign: "justify",
+    textAlignVertical: "top",
+    overflow: "hidden",
+    paddingHorizontal: 25,
+    paddingVertical: 25,
   },
+
   timerContainer: {
     width: "100%",
     height: "30%",
@@ -105,12 +120,12 @@ const styles = StyleSheet.create({
   timer: {
     fontSize: 58,
   },
-  RespondOutter: {
+  SubmitOutter: {
     height: "20%",
     width: "100%",
     alignItems: "center",
   },
-  RespondContainer: {
+  SubmitContainer: {
     backgroundColor: "#D0AC7B",
     width: 240,
     height: 67,
@@ -118,7 +133,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  RespondBTN: {
+  SubmitBTN: {
     fontSize: 24,
     textAlign: "center",
     fontWeight: "400",
@@ -126,4 +141,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default QuestionAsked;
+export default Answer1;

@@ -8,7 +8,8 @@ import Screen3 from "./Components/screen3";
 import NameInput from "./Components/NameInput";
 import BeginScreen from "./Components/BeginScreen";
 import Question1 from "./Components/question1";
-import TimerScreen from "./Components/TimerScreen";
+import QuestionAsked from "./Components/Question1Asked";
+import Answer1 from "./Components/Answer1";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { GlobalProvider } from "./context";
@@ -20,7 +21,7 @@ export default function App() {
     <GlobalProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Question1"
+          initialRouteName="FrontPage"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="FrontPage" component={FrontPage} />
@@ -31,7 +32,8 @@ export default function App() {
           <Stack.Screen name="NameInput" component={NameInput} />
           <Stack.Screen name="BeginScreen" component={BeginScreen} />
           <Stack.Screen name="Question1" component={Question1} />
-          <Stack.Screen name="TimerScreen" component={TimerScreen} />
+          <Stack.Screen name="QuestionAsked" component={QuestionAsked} />
+          <Stack.Screen name="Answer1" component={Answer1} />
         </Stack.Navigator>
       </NavigationContainer>
     </GlobalProvider>

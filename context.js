@@ -1,18 +1,46 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-  const [Question, setQuestion] = useState("");
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
   const [isRunning, setIsRunning] = useState(false);
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    let timer;
+    if (isRunning && seconds > 0) {
+      timer = setInterval(() => {
+        setSeconds((prev) => (prev > 0 ? prev - 1 : 0));
+      }, 1000);
+    } else if (seconds === 0) {
+      setIsRunning(false);
+    }
+    return () => clearInterval(timer);
+  }, [isRunning, seconds]);
+
+  const startTimer = (minutes) => {
+    setSeconds(minutes * 60);
+    setIsRunning(true);
+  };
+
+  const stopTimer = () => {
+    setIsRunning(false);
+    setSeconds(0);
+  };
 
   return (
     <GlobalContext.Provider
       value={{
-        Question,
+        question,
         setQuestion,
+        answer,
+        setAnswer,
         isRunning,
-        setIsRunning,
+        seconds,
+        startTimer,
+        stopTimer,
       }}
     >
       {children}
