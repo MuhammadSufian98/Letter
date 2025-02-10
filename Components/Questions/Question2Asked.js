@@ -37,7 +37,7 @@ const Question2Asked = () => {
         <View style={styles.RespondContainer}>
           <Pressable
             onPress={() => {
-              navigation.navigate("FrontPage");
+              navigation.navigate("Answer2");
             }}
           >
             <AppText style={styles.RespondBTN}>Respond</AppText>

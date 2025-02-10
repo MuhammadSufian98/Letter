@@ -23,7 +23,7 @@ const LetsContinue = () => {
       </View>
       <View style={styles.NextOutter}>
         <View style={styles.NextContainer}>
-          <Pressable onPress={() => navigation.navigate("Answer2")}>
+          <Pressable onPress={() => navigation.navigate("Question2")}>
             <AppText style={styles.NextBTN}>Next</AppText>
           </Pressable>
         </View>

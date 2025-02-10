@@ -42,7 +42,6 @@ const Answer2 = () => {
           <Pressable
             onPress={() => {
               stopTimer();
-              console.log(answer);
               navigation.navigate("ShowAnswer2");
             }}
           >
