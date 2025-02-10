@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     fontWeight: "200",
   },
   timer: {
-    fontSize: 58,
+    fontSize: 38,
   },
   SubmitOutter: {
     height: "20%",
@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
   SubmitContainer: {
     backgroundColor: "#D0AC7B",
     width: 240,
+    marginTop: 10,
     height: 67,
     borderRadius: 50,
     justifyContent: "center",

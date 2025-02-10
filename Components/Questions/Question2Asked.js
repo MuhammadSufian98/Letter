@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: 240,
     height: 144,
-    justifyContent:"center",
+    justifyContent: "center",
   },
   timerContainer: {
     width: "100%",
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     fontWeight: "200",
   },
   timer: {
-    fontSize: 58,
+    fontSize: 38,
   },
   RespondOutter: {
     height: "20%",
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#D0AC7B",
     width: 240,
     height: 67,
+    marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",

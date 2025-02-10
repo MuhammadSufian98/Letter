@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  Pressable,
-  TextInput,
-} from "react-native";
+import { View, StyleSheet, Image, Pressable, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AppText } from "../fontPoppins";
 
@@ -114,6 +108,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#D0AC7B",
     width: 240,
     height: 67,
+    marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "bottom",
