@@ -5,7 +5,8 @@ import { AppText } from "../../fontPoppins";
 import { GlobalContext } from "../../context";
 
 const Answer1 = () => {
-  const { answer, setAnswer, seconds, stopTimer } = useContext(GlobalContext);
+  const { answer, setAnswer, seconds, stopTimer, QuestionNo } =
+    useContext(GlobalContext);
   const navigation = useNavigation();
 
   const formatTime = () => {
@@ -21,7 +22,7 @@ const Answer1 = () => {
       </View>
       <View style={styles.Answer}>
         <View style={styles.headingOutter}>
-          <AppText style={styles.heading}>ANSWER #1</AppText>
+          <AppText style={styles.heading}>ANSWER #{QuestionNo}</AppText>
           <View style={styles.InputContainer}>
             <TextInput
               style={styles.input}

@@ -5,7 +5,7 @@ import { GlobalContext } from "../../context";
 import { useNavigation } from "@react-navigation/native";
 
 const ShowAnswer1 = () => {
-  const { answer } = useContext(GlobalContext);
+  const { answer, QuestionNo } = useContext(GlobalContext);
   const navigation = useNavigation();
 
   return (
@@ -15,7 +15,7 @@ const ShowAnswer1 = () => {
       </View>
       <View style={styles.Answer}>
         <View style={styles.headingOutter}>
-          <AppText style={styles.heading}>ANSWER #1</AppText>
+          <AppText style={styles.heading}>ANSWER #{QuestionNo}</AppText>
         </View>
         <View style={styles.AnswerContainer}>
           <AppText style={styles.ShowAnswer}>{answer}</AppText>

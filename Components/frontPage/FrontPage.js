@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "bottom",
   },
   NextBTN: {
     fontSize: 24,

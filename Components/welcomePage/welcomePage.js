@@ -3,14 +3,11 @@ import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AppText } from "../../fontPoppins";
 
-
 const WelcomePage = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
-      </View>
       <View style={styles.innerContainer}>
         <Image source={require("../Logo.png")} style={styles.image} />
         <AppText style={styles.text}>W E L C O M E T O</AppText>
@@ -36,7 +33,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5FCFF",
     width: "100%",
     height: "100%",
-    gap: 100,
   },
   imageContainer: {
     flexDirection: "column",
@@ -51,7 +47,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    height: "50%",
+    height: "80%",
     gap: 10,
   },
   text: {
@@ -67,7 +63,8 @@ const styles = StyleSheet.create({
   },
   NextOutter: {
     position: "static",
-    height: "30%",
+    height: "20%",
+    bottom: 0,
     width: "100%",
     alignItems: "center",
   },

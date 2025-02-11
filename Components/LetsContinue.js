@@ -1,10 +1,18 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import React, { useContext } from "react";
+import { View, StyleSheet, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AppText } from "../fontPoppins";
+import { GlobalContext } from "..//context";
 
 const LetsContinue = () => {
   const navigation = useNavigation();
+  const { setQuestionNo, setAnswer, setQuestion } = useContext(GlobalContext);
+
+  const handleNext = () => {
+    setQuestionNo((prev) => prev + 1);
+    setQuestion(""), setAnswer("");
+    navigation.navigate("Question1");
+  };
 
   return (
     <View style={styles.container}>
@@ -23,7 +31,7 @@ const LetsContinue = () => {
       </View>
       <View style={styles.NextOutter}>
         <View style={styles.NextContainer}>
-          <Pressable onPress={() => navigation.navigate("Question2")}>
+          <Pressable onPress={handleNext}>
             <AppText style={styles.NextBTN}>Next</AppText>
           </Pressable>
         </View>

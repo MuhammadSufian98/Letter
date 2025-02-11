@@ -6,7 +6,8 @@ import { GlobalContext } from "../../context";
 
 const Question1 = () => {
   const navigation = useNavigation();
-  const { question, setQuestion, startTimer } = useContext(GlobalContext);
+  const { question, setQuestion, QuestionNo, startTimer } =
+    useContext(GlobalContext);
   const [minutes, setMinutes] = useState("");
 
   const handleAsk = () => {
@@ -23,7 +24,7 @@ const Question1 = () => {
       </View>
       <View style={styles.askQuestion}>
         <View style={styles.headingOutter}>
-          <AppText style={styles.heading}>QUESTION #1</AppText>
+          <AppText style={styles.heading}>QUESTION #{QuestionNo}</AppText>
         </View>
         <View style={styles.InputContainer}>
           <TextInput

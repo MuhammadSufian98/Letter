@@ -5,7 +5,7 @@ import { AppText } from "../../fontPoppins";
 import { GlobalContext } from "../../context";
 
 const Question1Asked = () => {
-  const { question, seconds } = useContext(GlobalContext);
+  const { question, QuestionNo, seconds } = useContext(GlobalContext);
   const navigation = useNavigation();
 
   const formatTime = () => {
@@ -21,7 +21,7 @@ const Question1Asked = () => {
       </View>
       <View style={styles.askQuestion}>
         <View style={styles.headingOutter}>
-          <AppText style={styles.heading}>QUESTION #1</AppText>
+          <AppText style={styles.heading}>QUESTION #{QuestionNo}</AppText>
           <View style={styles.QuestionContainer}>
             <AppText style={styles.Question}>
               {question || "What is your question?"}
