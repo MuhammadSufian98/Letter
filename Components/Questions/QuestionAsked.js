@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AppText } from "../../fontPoppins";
 import { GlobalContext } from "../../context";
 
-const Question1Asked = () => {
+const QuestionAsked = () => {
   const { question, QuestionNo, seconds } = useContext(GlobalContext);
   const navigation = useNavigation();
 
@@ -37,7 +37,7 @@ const Question1Asked = () => {
         <View style={styles.RespondContainer}>
           <Pressable
             onPress={() => {
-              navigation.navigate("Answer1");
+              navigation.navigate("Answer");
             }}
           >
             <AppText style={styles.RespondBTN}>Respond</AppText>
@@ -127,4 +127,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Question1Asked;
+export default QuestionAsked;

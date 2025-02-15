@@ -27,10 +27,10 @@ const screens = [
   { name: "Screen3", component: Screen3 },
   { name: "NameInput", component: NameInput },
   { name: "BeginScreen", component: BeginScreen },
-  { name: "Question1", component: Question },
-  { name: "Question1Asked", component: QuestionAsked },
-  { name: "Answer1", component: Answer },
-  { name: "ShowAnswer1", component: ShowAnswer },
+  { name: "Question", component: Question },
+  { name: "QuestionAsked", component: QuestionAsked },
+  { name: "Answer", component: Answer },
+  { name: "ShowAnswer", component: ShowAnswer },
   { name: "LetsContinue", component: LetsContinue },
 ];
 

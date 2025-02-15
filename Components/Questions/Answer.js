@@ -1,13 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, Pressable, Image, StyleSheet, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AppText } from "../../fontPoppins";
 import { GlobalContext } from "../../context";
 
-const Answer1 = () => {
+const Answer = () => {
   const { answer, setAnswer, seconds, stopTimer, QuestionNo } =
     useContext(GlobalContext);
   const navigation = useNavigation();
+  useEffect(() => {
+    if (seconds === 0) {
+      stopTimer();
+      navigation.navigate("ShowAnswer");
+    }
+  }, [seconds, navigation, stopTimer]);
 
   const formatTime = () => {
     const mins = Math.floor(seconds / 60);
@@ -43,7 +49,7 @@ const Answer1 = () => {
           <Pressable
             onPress={() => {
               stopTimer();
-              navigation.navigate("ShowAnswer1");
+              navigation.navigate("ShowAnswer");
             }}
           >
             <AppText style={styles.SubmitBTN}>SUBMIT</AppText>
@@ -142,4 +148,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Answer1;
+export default Answer;

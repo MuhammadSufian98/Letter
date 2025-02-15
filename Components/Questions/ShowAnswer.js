@@ -4,7 +4,7 @@ import { AppText } from "../../fontPoppins";
 import { GlobalContext } from "../../context";
 import { useNavigation } from "@react-navigation/native";
 
-const ShowAnswer1 = () => {
+const ShowAnswer = () => {
   const { answer, QuestionNo } = useContext(GlobalContext);
   const navigation = useNavigation();
 
@@ -101,4 +101,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ShowAnswer1;
+export default ShowAnswer;

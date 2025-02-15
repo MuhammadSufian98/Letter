@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { View, StyleSheet, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AppText } from "../fontPoppins";
-import { GlobalContext } from "..//context";
+import { GlobalContext } from "../context";
 
 const LetsContinue = () => {
   const navigation = useNavigation();
@@ -11,7 +11,13 @@ const LetsContinue = () => {
   const handleNext = () => {
     setQuestionNo((prev) => prev + 1);
     setQuestion(""), setAnswer("");
-    navigation.navigate("Question1");
+    navigation.navigate("Question");
+  };
+  const handleExit = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "FrontPage" }],
+    });
   };
 
   return (
@@ -36,7 +42,7 @@ const LetsContinue = () => {
           </Pressable>
         </View>
         <View>
-          <Pressable onPress={() => navigation.navigate("FrontPage")}>
+          <Pressable onPress={handleExit}>
             <AppText style={styles.ExitBTN}>Exit</AppText>
           </Pressable>
         </View>

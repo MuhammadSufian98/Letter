@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AppText } from "../../fontPoppins";
 import { GlobalContext } from "../../context";
 
-const Question1 = () => {
+const Question = () => {
   const navigation = useNavigation();
   const { question, setQuestion, QuestionNo, startTimer } =
     useContext(GlobalContext);
@@ -13,7 +13,7 @@ const Question1 = () => {
   const handleAsk = () => {
     if (!isNaN(minutes) && minutes > 0) {
       startTimer(Number(minutes));
-      navigation.navigate("Question1Asked");
+      navigation.navigate("QuestionAsked");
     }
   };
 
@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     height: "50%",
-    // gap: 20,
   },
   headingOutter: {
     alignItems: "center",
@@ -120,13 +119,12 @@ const styles = StyleSheet.create({
   },
   inputTimer: {
     width: 200,
-    height: 40,
+    // height: 40,
     borderColor: "#D0AC7B80",
     borderWidth: 1,
     borderRadius: 10,
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: "400",
-    lineHeight: 36,
     color: "#D0AC7B",
     textAlign: "center",
   },
@@ -154,4 +152,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Question1;
+export default Question;

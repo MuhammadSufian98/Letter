@@ -23,7 +23,7 @@ const BeginScreen = () => {
       </View>
       <View style={styles.NextOutter}>
         <View style={styles.NextContainer}>
-          <Pressable onPress={() => navigation.navigate("Question1")}>
+          <Pressable onPress={() => navigation.navigate("Question")}>
             <AppText style={styles.NextBTN}>Next</AppText>
           </Pressable>
         </View>
