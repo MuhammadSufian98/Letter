@@ -5,8 +5,24 @@ import { GlobalContext } from "../../context";
 import { useNavigation } from "@react-navigation/native";
 
 const ShowAnswer = () => {
-  const { answer, QuestionNo } = useContext(GlobalContext);
+  const {
+    QuestionNo,
+    setQuestionNo,
+    question,
+    answer,
+    setAnswer,
+    setQuestion,
+    setData,
+  } = useContext(GlobalContext);
   const navigation = useNavigation();
+
+  const handleContinue = () => {
+    setQuestionNo((prev) => prev + 1);
+    const QnAobj = { Question: question, Answer: answer };
+    setData((prevData) => [...prevData, QnAobj]);
+    setQuestion(""), setAnswer("");
+    navigation.navigate("LetsContinue");
+  };
 
   return (
     <View style={styles.container}>
@@ -23,11 +39,7 @@ const ShowAnswer = () => {
       </View>
       <View style={styles.CONTINUEOutter}>
         <View style={styles.CONTINUEContainer}>
-          <Pressable
-            onPress={() => {
-              navigation.navigate("LetsContinue");
-            }}
-          >
+          <Pressable onPress={handleContinue}>
             <AppText style={styles.CONTINUEBTN}>CONTINUE</AppText>
           </Pressable>
         </View>

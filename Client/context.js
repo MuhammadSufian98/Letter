@@ -8,6 +8,7 @@ export const GlobalProvider = ({ children }) => {
   const [isRunning, setIsRunning] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [QuestionNo, setQuestionNo] = useState(1);
+  const [Data, setData] = useState([]);
 
   useEffect(() => {
     let timer;
@@ -44,6 +45,8 @@ export const GlobalProvider = ({ children }) => {
         stopTimer,
         QuestionNo,
         setQuestionNo,
+        Data,
+        setData,
       }}
     >
       {children}

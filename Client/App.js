@@ -15,6 +15,7 @@ import {
   Answer,
   ShowAnswer,
   LetsContinue,
+  Result,
 } from "./screens";
 
 const Stack = createNativeStackNavigator();
@@ -32,6 +33,7 @@ const screens = [
   { name: "Answer", component: Answer },
   { name: "ShowAnswer", component: ShowAnswer },
   { name: "LetsContinue", component: LetsContinue },
+  { name: "Result", component: Result },
 ];
 
 export default function App() {
@@ -39,7 +41,7 @@ export default function App() {
     <GlobalProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="FrontPage"
+          initialRouteName="Question"
           screenOptions={{ headerShown: false }}
         >
           {screens.map(({ name, component }) => (

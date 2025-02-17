@@ -6,18 +6,14 @@ import { GlobalContext } from "../context";
 
 const LetsContinue = () => {
   const navigation = useNavigation();
-  const { setQuestionNo, setAnswer, setQuestion } = useContext(GlobalContext);
+  const { setQuestionNo } = useContext(GlobalContext);
 
   const handleNext = () => {
-    setQuestionNo((prev) => prev + 1);
-    setQuestion(""), setAnswer("");
     navigation.navigate("Question");
   };
   const handleExit = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "FrontPage" }],
-    });
+    setQuestionNo(1);
+    navigation.navigate("Result");
   };
 
   return (

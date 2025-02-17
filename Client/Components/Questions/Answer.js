@@ -13,7 +13,7 @@ const Answer = () => {
       stopTimer();
       navigation.navigate("ShowAnswer");
     }
-  }, [seconds, navigation, stopTimer]);
+  }, [seconds]);
 
   const formatTime = () => {
     const mins = Math.floor(seconds / 60);

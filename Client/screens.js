@@ -10,3 +10,4 @@ export { default as QuestionAsked } from "./Components/Questions/QuestionAsked";
 export { default as Answer } from "./Components/Questions/Answer";
 export { default as ShowAnswer } from "./Components/Questions/ShowAnswer";
 export { default as LetsContinue } from "./Components/LetsContinue";
+export { default as Result } from "./Components/Questions/Result";
