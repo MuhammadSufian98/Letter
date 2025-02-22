@@ -41,6 +41,12 @@ const NameInput = () => {
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         />
+
+        {!name.firstName.trim() && (
+          <AppText style={styles.warningText}>
+            Enter first name to continue
+          </AppText>
+        )}
       </View>
       <View style={styles.NextOutter}>
         <View style={styles.NextContainer}>
@@ -104,6 +110,12 @@ const styles = StyleSheet.create({
   inputFocused: {
     borderColor: "#D0AC7B",
   },
+  warningText: {
+    color: "red",
+    fontSize: 14,
+    marginTop: 5,
+  },
+
   NextOutter: {
     position: "static",
     height: "20%",
