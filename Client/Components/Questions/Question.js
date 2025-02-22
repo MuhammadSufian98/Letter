@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   },
   inputTimer: {
     width: 200,
-    // height: 40,
+    height: 40,
     borderColor: "#D0AC7B80",
     borderWidth: 1,
     borderRadius: 10,

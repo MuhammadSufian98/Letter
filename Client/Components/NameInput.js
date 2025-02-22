@@ -44,7 +44,15 @@ const NameInput = () => {
       </View>
       <View style={styles.NextOutter}>
         <View style={styles.NextContainer}>
-          <Pressable onPress={() => navigation.navigate("BeginScreen")}>
+          <Pressable
+            onPress={() => navigation.navigate("BeginScreen")}
+            disabled={!name.firstName.trim()}
+            style={({ pressed }) => [
+              styles.NextBTNContainer,
+              !name.firstName.trim() && styles.disabledBTN,
+              pressed && styles.pressedBTN,
+            ]}
+          >
             <AppText style={styles.NextBTN}>Next</AppText>
           </Pressable>
         </View>
@@ -69,7 +77,6 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
   },
-
   InputContainer: {
     height: "50%",
     justifyContent: "flex-start",
@@ -105,20 +112,31 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   NextContainer: {
-    backgroundColor: "#D0AC7B",
     width: 240,
     height: 67,
     marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",
-    alignItems: "bottom",
+    alignItems: "center",
+  },
+  NextBTNContainer: {
+    backgroundColor: "#D0AC7B",
+    width: "100%",
+    height: "100%",
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
   NextBTN: {
     fontSize: 24,
-    textAlign: "center",
-    margin: 10,
     fontWeight: "400",
     color: "#FFFFFF",
+  },
+  disabledBTN: {
+    backgroundColor: "#D0AC7B80",
+  },
+  pressedBTN: {
+    opacity: 0.7,
   },
 });
 

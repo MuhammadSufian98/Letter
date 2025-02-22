@@ -21,6 +21,7 @@ const ShowAnswer = () => {
     const QnAobj = { Question: question, Answer: answer };
     setData((prevData) => [...prevData, QnAobj]);
     setQuestion(""), setAnswer("");
+
     navigation.navigate("LetsContinue");
   };
 

@@ -41,7 +41,7 @@ export default function App() {
     <GlobalProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Question"
+          initialRouteName="FrontPage"
           screenOptions={{ headerShown: false }}
         >
           {screens.map(({ name, component }) => (

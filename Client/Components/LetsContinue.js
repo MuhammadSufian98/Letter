@@ -1,17 +1,29 @@
 import React, { useContext } from "react";
 import { View, StyleSheet, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 import { AppText } from "../fontPoppins";
 import { GlobalContext } from "../context";
 
 const LetsContinue = () => {
   const navigation = useNavigation();
-  const { setQuestionNo } = useContext(GlobalContext);
+  const { setQuestionNo, Data } = useContext(GlobalContext);
+
+  async function postData() {
+    try {
+      console.log(Data);
+      const response = await axios.post("http://localhost:3000/submit", Data);
+      console.log("Data sent successfully:", response.data);
+    } catch (error) {
+      console.error("Error sending data:", error);
+    }
+  }
 
   const handleNext = () => {
     navigation.navigate("Question");
   };
   const handleExit = () => {
+    postData();
     setQuestionNo(1);
     navigation.navigate("Result");
   };
