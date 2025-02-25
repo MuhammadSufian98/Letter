@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
-import { View, StyleSheet, Image, Pressable } from "react-native";
+import React, { useContext, useCallback } from "react";
+import { View, StyleSheet, Image, Pressable,Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import { AppText } from "../fontPoppins";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 import { GlobalContext } from "../context";
 
 const LetsContinue = () => {
@@ -24,34 +25,50 @@ const LetsContinue = () => {
   };
   const handleExit = () => {
     postData();
+
     setQuestionNo(1);
     navigation.navigate("Result");
   };
 
+  const [fontsLoaded] = useFonts({
+    "Poppins-Regular": require("../assets/Poppins-Regular_684471b5ff3c204b8d3b3da3bd4e082d.ttf"),
+    "Aboreto-Regular": require("../assets/Aboreto Regular 400.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.imageContainer}>
         <Image source={require("./Logo.png")} style={styles.image} />
       </View>
       <View style={styles.DocContainer}>
         <View style={styles.headingOutter}>
-          <AppText style={styles.heading}>LET’S CONTINUE</AppText>
+          <Text style={styles.heading}>LET’S CONTINUE</Text>
         </View>
         <View style={styles.textContainer}>
-          <AppText style={styles.text}>
+          <Text style={styles.text}>
             Please pass the phone to Michelle. She will ask the second question.
-          </AppText>
+          </Text>
         </View>
       </View>
       <View style={styles.NextOutter}>
         <View style={styles.NextContainer}>
           <Pressable onPress={handleNext}>
-            <AppText style={styles.NextBTN}>Next</AppText>
+            <Text style={styles.NextBTN}>Next</Text>
           </Pressable>
         </View>
         <View>
           <Pressable onPress={handleExit}>
-            <AppText style={styles.ExitBTN}>Exit</AppText>
+            <Text style={styles.ExitBTN}>Exit</Text>
           </Pressable>
         </View>
       </View>
@@ -61,6 +78,7 @@ const LetsContinue = () => {
 
 const styles = StyleSheet.create({
   container: {
+    fontFamily: "Poppins-Regular",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -85,6 +103,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   heading: {
+    fontFamily: "Aboreto-Regular",
     fontSize: 24,
     fontWeight: "400",
     lineHeight: 41.76,

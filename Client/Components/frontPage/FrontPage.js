@@ -1,14 +1,29 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import React, { useState, useCallback } from "react";
+import { View, StyleSheet, Image, Pressable, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { AppText } from "../../fontPoppins";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 
 const FrontPage = () => {
   const [selected, setSelected] = useState("");
   const navigation = useNavigation();
 
+  const [fontsLoaded] = useFonts({
+    "Poppins-Regular": require("../../assets/Poppins-Regular_684471b5ff3c204b8d3b3da3bd4e082d.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.imageContainer}>
         <Image source={require("../Logo.png")} style={styles.image} />
       </View>
@@ -28,7 +43,7 @@ const FrontPage = () => {
               source={require("./united-states.png")}
               style={styles.langImage}
             />
-            <AppText style={styles.text}>English</AppText>
+            <Text style={styles.text}>English</Text>
           </Pressable>
         </View>
 
@@ -43,7 +58,7 @@ const FrontPage = () => {
             onPress={() => setSelected("Español")}
           >
             <Image source={require("./world.png")} style={styles.langImage} />
-            <AppText style={styles.text}>Español</AppText>
+            <Text style={styles.text}>Español</Text>
           </Pressable>
         </View>
       </View>
@@ -56,7 +71,7 @@ const FrontPage = () => {
           }
         >
           <Pressable onPress={() => navigation.navigate("WelcomePage")}>
-            <AppText style={styles.NextBTN}>Next</AppText>
+            <Text style={styles.NextBTN}>Next</Text>
           </Pressable>
         </View>
       </View>
@@ -66,6 +81,7 @@ const FrontPage = () => {
 
 const styles = StyleSheet.create({
   container: {
+    fontFamily: "Poppins-Regular",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",

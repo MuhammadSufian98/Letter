@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
-import { View, Pressable, Image, StyleSheet } from "react-native";
+import React, { useContext, useCallback } from "react";
+import { View, Pressable, Image, StyleSheet, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { AppText } from "../../fontPoppins";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 import { GlobalContext } from "../../context";
 
 const QuestionAsked = () => {
@@ -14,23 +15,38 @@ const QuestionAsked = () => {
     return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
   };
 
+  const [fontsLoaded] = useFonts({
+    "Poppins-Regular": require("../../assets/Poppins-Regular_684471b5ff3c204b8d3b3da3bd4e082d.ttf"),
+    "Aboreto-Regular": require("../../assets/Aboreto Regular 400.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.imageContainer}>
         <Image source={require("../Logo.png")} style={styles.image} />
       </View>
       <View style={styles.askQuestion}>
         <View style={styles.headingOutter}>
-          <AppText style={styles.heading}>QUESTION #{QuestionNo}</AppText>
+          <Text style={styles.heading}>QUESTION #{QuestionNo}</Text>
           <View style={styles.QuestionContainer}>
-            <AppText style={styles.Question}>
+            <Text style={styles.Question}>
               {question || "What is your question?"}
-            </AppText>
+            </Text>
           </View>
         </View>
         <View style={styles.timerContainer}>
-          <AppText style={styles.TimerHeading}>TIME REMAINING</AppText>
-          <AppText style={styles.timer}>{formatTime()}</AppText>
+          <Text style={styles.TimerHeading}>TIME REMAINING</Text>
+          <Text style={styles.timer}>{formatTime()}</Text>
         </View>
       </View>
       <View style={styles.RespondOutter}>
@@ -40,7 +56,7 @@ const QuestionAsked = () => {
               navigation.navigate("Answer");
             }}
           >
-            <AppText style={styles.RespondBTN}>Respond</AppText>
+            <Text style={styles.RespondBTN}>Respond</Text>
           </Pressable>
         </View>
       </View>
@@ -50,6 +66,7 @@ const QuestionAsked = () => {
 
 const styles = StyleSheet.create({
   container: {
+    fontFamily: "Poppins-Regular",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -76,6 +93,7 @@ const styles = StyleSheet.create({
     gap: 30,
   },
   heading: {
+    fontFamily: "Aboreto-Regular",
     fontSize: 36,
     fontWeight: "400",
     lineHeight: 41.76,
@@ -99,6 +117,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   TimerHeading: {
+    fontFamily: "Aboreto-Regular",
     fontSize: 20,
     fontWeight: "200",
   },
@@ -106,7 +125,9 @@ const styles = StyleSheet.create({
     fontSize: 38,
   },
   RespondOutter: {
+    position: "static",
     height: "20%",
+    bottom: 0,
     width: "100%",
     alignItems: "center",
   },
@@ -117,11 +138,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "bottom",
   },
   RespondBTN: {
     fontSize: 24,
     textAlign: "center",
+    margin: 10,
     fontWeight: "400",
     color: "#FFFFFF",
   },

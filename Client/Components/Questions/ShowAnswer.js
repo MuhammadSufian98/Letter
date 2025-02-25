@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
-import { View, StyleSheet, Pressable, Image } from "react-native";
-import { AppText } from "../../fontPoppins";
+import React, { useContext, useCallback } from "react";
+import { View, StyleSheet, Pressable, Image, Text } from "react-native";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 import { GlobalContext } from "../../context";
 import { useNavigation } from "@react-navigation/native";
 
@@ -25,23 +26,38 @@ const ShowAnswer = () => {
     navigation.navigate("LetsContinue");
   };
 
+  const [fontsLoaded] = useFonts({
+    "Poppins-Regular": require("../../assets/Poppins-Regular_684471b5ff3c204b8d3b3da3bd4e082d.ttf"),
+    "Aboreto-Regular": require("../../assets/Aboreto Regular 400.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.imageContainer}>
         <Image source={require("../Logo.png")} style={styles.image} />
       </View>
       <View style={styles.Answer}>
         <View style={styles.headingOutter}>
-          <AppText style={styles.heading}>ANSWER #{QuestionNo}</AppText>
+          <Text style={styles.heading}>ANSWER #{QuestionNo}</Text>
         </View>
         <View style={styles.AnswerContainer}>
-          <AppText style={styles.ShowAnswer}>{answer}</AppText>
+          <Text style={styles.ShowAnswer}>{answer}</Text>
         </View>
       </View>
-      <View style={styles.CONTINUEOutter}>
-        <View style={styles.CONTINUEContainer}>
+      <View style={styles.ContinueOutter}>
+        <View style={styles.ContinueContainer}>
           <Pressable onPress={handleContinue}>
-            <AppText style={styles.CONTINUEBTN}>CONTINUE</AppText>
+            <Text style={styles.ContinueBTN}>CONTINUE</Text>
           </Pressable>
         </View>
       </View>
@@ -51,6 +67,7 @@ const ShowAnswer = () => {
 
 const styles = StyleSheet.create({
   container: {
+    fontFamily: "Poppins-Regular",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -76,6 +93,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   heading: {
+    fontFamily: "Aboreto-Regular",
     fontSize: 36,
     fontWeight: "400",
     lineHeight: 41.76,
@@ -92,23 +110,26 @@ const styles = StyleSheet.create({
     height: 144,
     justifyContent: "center",
   },
-  CONTINUEOutter: {
+  ContinueOutter: {
+    position: "static",
     height: "20%",
+    bottom: 0,
     width: "100%",
     alignItems: "center",
   },
-  CONTINUEContainer: {
+  ContinueContainer: {
     backgroundColor: "#D0AC7B",
     width: 240,
     height: 67,
     marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "bottom",
   },
-  CONTINUEBTN: {
+  ContinueBTN: {
     fontSize: 24,
     textAlign: "center",
+    margin: 10,
     fontWeight: "400",
     color: "#FFFFFF",
   },

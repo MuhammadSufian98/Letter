@@ -1,23 +1,39 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { AppText } from "../../fontPoppins";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 
 const WelcomePage = () => {
   const navigation = useNavigation();
 
+  const [fontsLoaded] = useFonts({
+    "Poppins-Regular": require("../../assets/Poppins-Regular_684471b5ff3c204b8d3b3da3bd4e082d.ttf"),
+    "Aboreto-Regular": require("../../assets/Aboreto Regular 400.ttf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.innerContainer}>
         <Image source={require("../Logo.png")} style={styles.image} />
-        <AppText style={styles.text}>W E L C O M E T O</AppText>
-        <AppText style={styles.name}>SOLOMON’S</AppText>
-        <AppText style={styles.text}>L E T T E R S</AppText>
+        <Text style={styles.text}>W E L C O M E  T O</Text>
+        <Text style={styles.name}>SOLOMON’S</Text>
+        <Text style={styles.text}>L E T T E R S</Text>
       </View>
       <View style={styles.NextOutter}>
         <View style={styles.NextContainer}>
           <Pressable onPress={() => navigation.navigate("Screen1")}>
-            <AppText style={styles.NextBTN}>Next</AppText>
+            <Text style={styles.NextBTN}>Next</Text>
           </Pressable>
         </View>
       </View>
@@ -27,6 +43,7 @@ const WelcomePage = () => {
 
 const styles = StyleSheet.create({
   container: {
+    fontFamily: "Poppins-Regular",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -59,6 +76,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 45,
+    fontFamily: "Aboreto-Regular",
     color: "#1E1E1E",
   },
   NextOutter: {
@@ -75,7 +93,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "bottom",
   },
   NextBTN: {
     fontSize: 24,
