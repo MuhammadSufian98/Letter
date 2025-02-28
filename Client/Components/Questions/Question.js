@@ -6,6 +6,8 @@ import {
   Image,
   Pressable,
   Text,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts } from "expo-font";
@@ -19,7 +21,7 @@ const Question = () => {
   const [minutes, setMinutes] = useState("");
 
   const handleAsk = () => {
-    if (!isNaN(minutes) && minutes > 0) {
+    if (!isNaN(minutes) && minutes > 0 && question) {
       startTimer(Number(minutes));
       navigation.navigate("QuestionAsked");
     }
@@ -41,42 +43,49 @@ const Question = () => {
   }
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <View style={styles.imageContainer}>
-        <Image source={require("../Logo.png")} style={styles.image} />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <View style={{ height: 825, justifyContent: "center" }}>
+        <View style={styles.container} onLayout={onLayoutRootView}>
+          <View style={styles.imageContainer}>
+            <Image source={require("../Logo.png")} style={styles.image} />
+          </View>
+          <View style={styles.askQuestion}>
+            <View style={styles.headingOutter}>
+              <Text style={styles.heading}>QUESTION #{QuestionNo}</Text>
+            </View>
+            <View style={styles.InputContainer}>
+              <TextInput
+                style={styles.input}
+                placeholder="What is your question?"
+                value={question}
+                onChangeText={setQuestion}
+                multiline={true}
+              />
+            </View>
+            <View style={styles.InputTimerContainer}>
+              <Text style={styles.TimeHeading}>SET TIMER</Text>
+              <TextInput
+                style={styles.inputTimer}
+                placeholder="Enter minutes"
+                keyboardType="numeric"
+                value={minutes}
+                onChangeText={setMinutes}
+              />
+            </View>
+          </View>
+          <View style={styles.NextOutter}>
+            <View style={styles.NextContainer}>
+              <Pressable onPress={handleAsk}>
+                <Text style={styles.NextBTN}>Ask</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
       </View>
-      <View style={styles.askQuestion}>
-        <View style={styles.headingOutter}>
-          <Text style={styles.heading}>QUESTION #{QuestionNo}</Text>
-        </View>
-        <View style={styles.InputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="What is your question?"
-            value={question}
-            onChangeText={setQuestion}
-            multiline={true}
-          />
-        </View>
-        <View style={styles.InputTimerContainer}>
-          <Text style={styles.TimeHeading}>SET TIMER</Text>
-          <TextInput
-            style={styles.inputTimer}
-            placeholder="Enter minutes"
-            keyboardType="numeric"
-            value={minutes}
-            onChangeText={setMinutes}
-          />
-        </View>
-      </View>
-      <View style={styles.NextOutter}>
-        <View style={styles.NextContainer}>
-          <Pressable onPress={handleAsk}>
-            <Text style={styles.NextBTN}>Ask</Text>
-          </Pressable>
-        </View>
-      </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -111,6 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: "400",
     lineHeight: 41.76,
+    paddingBottom: 10,
   },
   InputContainer: {
     width: 321,
@@ -130,8 +140,6 @@ const styles = StyleSheet.create({
     textAlign: "justify",
     textAlignVertical: "top",
     overflow: "hidden",
-    paddingHorizontal: 25,
-    paddingVertical: 25,
   },
   InputTimerContainer: {
     justifyContent: "center",

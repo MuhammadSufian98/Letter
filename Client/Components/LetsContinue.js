@@ -1,5 +1,12 @@
-import React, { useContext, useCallback } from "react";
-import { View, StyleSheet, Image, Pressable,Text } from "react-native";
+import React, { useContext, useEffect, useCallback } from "react";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Pressable,
+  Text,
+  BackHandler,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { useFonts } from "expo-font";
@@ -9,6 +16,19 @@ import { GlobalContext } from "../context";
 const LetsContinue = () => {
   const navigation = useNavigation();
   const { setQuestionNo, Data } = useContext(GlobalContext);
+
+  useEffect(() => {
+    const backAction = () => {
+      return true; // Prevent going back
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   async function postData() {
     try {
@@ -21,6 +41,8 @@ const LetsContinue = () => {
   }
 
   const handleNext = () => {
+    setQuestionNo((prev) => prev + 1);
+
     navigation.navigate("Question");
   };
   const handleExit = () => {

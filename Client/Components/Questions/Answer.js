@@ -6,6 +6,8 @@ import {
   StyleSheet,
   TextInput,
   Text,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts } from "expo-font";
@@ -45,41 +47,50 @@ const Answer = () => {
   }
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <View style={styles.imageContainer}>
-        <Image source={require("../Logo.png")} style={styles.image} />
-      </View>
-      <View style={styles.Answer}>
-        <View style={styles.headingOutter}>
-          <Text style={styles.heading}>ANSWER #{QuestionNo}</Text>
-          <View style={styles.InputContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="ANSWER"
-              value={answer}
-              onChangeText={setAnswer}
-              multiline={true}
-            />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <View style={{ height: 825, justifyContent: "center" }}>
+        <View style={styles.container} onLayout={onLayoutRootView}>
+          <View style={styles.imageContainer}>
+            <Image source={require("../Logo.png")} style={styles.image} />
+          </View>
+          <View style={styles.Answer}>
+            <View style={styles.headingOutter}>
+              <Text style={styles.heading}>ANSWER #{QuestionNo}</Text>
+              <View style={styles.InputContainer}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="ANSWER"
+                  value={answer}
+                  onChangeText={setAnswer}
+                  multiline={true}
+                />
+              </View>
+            </View>
+            <View style={styles.timerContainer}>
+              <Text style={styles.TimerHeading}>TIME REMAINING</Text>
+              <Text style={styles.timer}>{formatTime()}</Text>
+            </View>
+          </View>
+          <View style={styles.SubmitOutter}>
+            <View style={styles.SubmitContainer}>
+              <Pressable
+                onPress={() => {
+                  if (answer) {
+                    stopTimer();
+                    navigation.navigate("ShowAnswer");
+                  }
+                }}
+              >
+                <Text style={styles.SubmitBTN}>SUBMIT</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
-        <View style={styles.timerContainer}>
-          <Text style={styles.TimerHeading}>TIME REMAINING</Text>
-          <Text style={styles.timer}>{formatTime()}</Text>
-        </View>
       </View>
-      <View style={styles.SubmitOutter}>
-        <View style={styles.SubmitContainer}>
-          <Pressable
-            onPress={() => {
-              stopTimer();
-              navigation.navigate("ShowAnswer");
-            }}
-          >
-            <Text style={styles.SubmitBTN}>SUBMIT</Text>
-          </Pressable>
-        </View>
-      </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -134,8 +145,6 @@ const styles = StyleSheet.create({
     textAlign: "justify",
     textAlignVertical: "top",
     overflow: "hidden",
-    paddingHorizontal: 25,
-    paddingVertical: 25,
   },
 
   timerContainer: {

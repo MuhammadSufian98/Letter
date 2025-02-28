@@ -6,6 +6,8 @@ import {
   Pressable,
   TextInput,
   Text,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts } from "expo-font";
@@ -35,56 +37,65 @@ const NameInput = () => {
   }
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <View style={styles.imageContainer}>
-        <Image source={require("./Logo.png")} style={styles.image} />
-      </View>
-      <View style={styles.InputContainer}>
-        <View style={styles.headingOutter}>
-          <Text style={styles.heading}>What is your name</Text>
-        </View>
-        <TextInput
-          style={styles.input}
-          placeholder="FIRST NAME"
-          placeholderTextColor="#D0AC7B80"
-          value={name.firstName}
-          onChangeText={(text) =>
-            setName((prev) => ({ ...prev, firstName: text }))
-          }
-        />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <View style={{ height: 825, justifyContent: "center" }}>
+        <View style={styles.container} onLayout={onLayoutRootView}>
+          <View style={styles.imageContainer}>
+            <Image source={require("./Logo.png")} style={styles.image} />
+          </View>
+          <View style={styles.InputContainer}>
+            <View style={styles.headingOutter}>
+              <Text style={styles.heading}>What is your name</Text>
+            </View>
+            <TextInput
+              style={styles.input}
+              placeholder="FIRST NAME"
+              placeholderTextColor="#D0AC7B80"
+              value={name.firstName}
+              onChangeText={(text) =>
+                setName((prev) => ({ ...prev, firstName: text }))
+              }
+            />
 
-        <TextInput
-          style={[styles.input, isFocused && styles.inputFocused]}
-          placeholder="LAST NAME"
-          placeholderTextColor="#D0AC7B80"
-          value={name.lastName}
-          onChangeText={(text) =>
-            setName((prev) => ({ ...prev, lastName: text }))
-          }
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-        />
+            <TextInput
+              style={[styles.input, isFocused && styles.inputFocused]}
+              placeholder="LAST NAME"
+              placeholderTextColor="#D0AC7B80"
+              value={name.lastName}
+              onChangeText={(text) =>
+                setName((prev) => ({ ...prev, lastName: text }))
+              }
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+            />
 
-        {!name.firstName.trim() && (
-          <Text style={styles.warningText}>Enter first name to continue</Text>
-        )}
-      </View>
-      <View style={styles.NextOutter}>
-        <View style={styles.NextContainer}>
-          <Pressable
-            onPress={() => navigation.navigate("BeginScreen")}
-            disabled={!name.firstName.trim()}
-            style={({ pressed }) => [
-              styles.NextBTNContainer,
-              !name.firstName.trim() && styles.disabledBTN,
-              pressed && styles.pressedBTN,
-            ]}
-          >
-            <Text style={styles.NextBTN}>Next</Text>
-          </Pressable>
+            {!name.firstName.trim() && (
+              <Text style={styles.warningText}>
+                Enter first name to continue
+              </Text>
+            )}
+          </View>
+          <View style={styles.NextOutter}>
+            <View style={styles.NextContainer}>
+              <Pressable
+                onPress={() => navigation.navigate("BeginScreen")}
+                disabled={!name.firstName.trim()}
+                style={({ pressed }) => [
+                  styles.NextBTNContainer,
+                  !name.firstName.trim() && styles.disabledBTN,
+                  pressed && styles.pressedBTN,
+                ]}
+              >
+                <Text style={styles.NextBTN}>Next</Text>
+              </Pressable>
+            </View>
+          </View>
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -95,6 +106,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f5fcff",
+    height: "100%",
   },
   imageContainer: {
     flexDirection: "column",
@@ -140,9 +152,7 @@ const styles = StyleSheet.create({
   },
 
   NextOutter: {
-    position: "static",
     height: "20%",
-    bottom: 0,
     width: "100%",
     alignItems: "center",
   },

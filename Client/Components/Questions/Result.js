@@ -57,9 +57,7 @@ const Result = () => {
           width="400px"
         />
       </div>
-      
-      <h1 style="font-size: 25px; margin: 0">Results</h1>
-      
+            
       <div style="padding: 30px;">
         ${Data.map(
           (item) => `
@@ -152,44 +150,22 @@ const Result = () => {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <ScrollView>
-        <View style={styles.logoContainer}>
-          <Image
-            source={{
-              uri: "https://s3-alpha-sig.figma.com/img/0bd8/7aa2/328ab591fd9929ccb2eac57dafde36f0?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ajH1nfCNb9~cLjc1cQ9sw4ESaQWfaD6aL591NYtF3ALZDId4wPZIi~EzzaQySIqFxxDmPe3884AjfsxK~c0r3WocqHbUq-ewqBuDINs1WJGjBjlKxvz7yicJLKY1mT02IscNVl-bG~KhyPYa6A53q8mR57TXThlW4FM4m8X68Uef6k9onR4zqp2F6y~hE8Ane6xPGG2g93zXeeg3EBtD9g-UoCd-RTMm7UmU6-2Go9~JUV2Bw6CiNtxt-3EU8lIqSj9wpQb3WgInIDDREbQJTw3HdIT94YNutWerv42YfJTfTv3YgwmOal1WtWojtPBf4PjT7P5u6rYRAR6SvTYoVg__",
-            }}
-            style={styles.logo}
-          />
-        </View>
-        <View style={styles.BTNs}>
-          <Pressable onPress={print} style={styles.DownloadContainer}>
-            <Text style={styles.DownloadBTN}>Create PDF</Text>
-          </Pressable>
-          <Pressable onPress={navigateToFrontPage} style={styles.ExitContainer}>
-            <Text style={styles.ExitBTN}>Exit</Text>
-          </Pressable>
-        </View>
-        <Text style={styles.title}>Results</Text>
-        <View style={styles.contentContainer}>
-          {Data.map((item, index) => (
-            <View key={index}>
-              <View style={styles.row}>
-                <Text style={styles.heading}>Question</Text>
-                <View style={styles.questionBox}>
-                  <Text>{item.Question}</Text>
-                </View>
-              </View>
-
-              <View style={styles.rowReverse}>
-                <Text style={styles.heading}>Answer</Text>
-                <View style={styles.answerBox}>
-                  <Text>{item.Answer}</Text>
-                </View>
-              </View>
-            </View>
-          ))}
-        </View>
-      </ScrollView>
+      <View style={styles.logoContainer}>
+        <Image
+          source={{
+            uri: "https://s3-alpha-sig.figma.com/img/0bd8/7aa2/328ab591fd9929ccb2eac57dafde36f0?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ajH1nfCNb9~cLjc1cQ9sw4ESaQWfaD6aL591NYtF3ALZDId4wPZIi~EzzaQySIqFxxDmPe3884AjfsxK~c0r3WocqHbUq-ewqBuDINs1WJGjBjlKxvz7yicJLKY1mT02IscNVl-bG~KhyPYa6A53q8mR57TXThlW4FM4m8X68Uef6k9onR4zqp2F6y~hE8Ane6xPGG2g93zXeeg3EBtD9g-UoCd-RTMm7UmU6-2Go9~JUV2Bw6CiNtxt-3EU8lIqSj9wpQb3WgInIDDREbQJTw3HdIT94YNutWerv42YfJTfTv3YgwmOal1WtWojtPBf4PjT7P5u6rYRAR6SvTYoVg__",
+          }}
+          style={styles.logo}
+        />
+      </View>
+      <View style={styles.BTNs}>
+        <Pressable onPress={print} style={styles.DownloadContainer}>
+          <Text style={styles.DownloadBTN}>Create PDF</Text>
+        </Pressable>
+        <Pressable onPress={navigateToFrontPage} style={styles.ExitContainer}>
+          <Text style={styles.ExitBTN}>Exit</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -200,8 +176,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  container: {
     padding: 20,
   },
   logoContainer: {
@@ -214,57 +188,9 @@ const styles = StyleSheet.create({
     height: 100,
     resizeMode: "contain",
   },
-  title: {
-    fontFamily:"Aboreto-Regular",
-    fontSize: 25,
-    textAlign: "center",
-    marginVertical: 10,
-  },
-  contentContainer: {
-    padding: 10,
-  },
-  row: {
-    flexDirection: "row",
-    gap: 20,
-    alignItems: "baseline",
-    marginBottom: 20,
-  },
-  rowReverse: {
-    flexDirection: "row-reverse",
-    gap: 20,
-    alignItems: "baseline",
-    marginBottom: 20,
-  },
-  heading: {
-    fontSize: 20,
-    textAlign: "left",
-    fontWeight: "bold",
-  },
-  questionBox: {
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 20,
-    padding: 10,
-    flex: 1,
-    maxWidth: 400,
-    width: "100%",
-    minWidth: 20,
-    textAlign: "center",
-  },
-  answerBox: {
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 20,
-    padding: 10,
-    flex: 1,
-    maxWidth: 400,
-    width: "100%",
-    minWidth: 20,
-  },
   BTNs: {
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "row",
   },
   DownloadContainer: {
     backgroundColor: "#D0AC7B",

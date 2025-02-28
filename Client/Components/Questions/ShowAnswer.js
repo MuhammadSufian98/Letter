@@ -18,7 +18,6 @@ const ShowAnswer = () => {
   const navigation = useNavigation();
 
   const handleContinue = () => {
-    setQuestionNo((prev) => prev + 1);
     const QnAobj = { Question: question, Answer: answer };
     setData((prevData) => [...prevData, QnAobj]);
     setQuestion(""), setAnswer("");
