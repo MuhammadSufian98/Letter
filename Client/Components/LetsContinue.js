@@ -19,7 +19,7 @@ const LetsContinue = () => {
 
   useEffect(() => {
     const backAction = () => {
-      return true; // Prevent going back
+      return true;
     };
 
     const backHandler = BackHandler.addEventListener(
