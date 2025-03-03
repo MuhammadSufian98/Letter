@@ -3,9 +3,6 @@
     "name": "FinalReactNativeApp",
     "slug": "FinalReactNativeApp",
     "version": "1.0.0",
-    "plugins": [
-      "expo-font"
-    ],
     "extra": {
       "eas": {
         "projectId": "95fa63b4-1617-448b-a1e7-7f209de9b960"
