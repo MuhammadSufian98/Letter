@@ -3,6 +3,20 @@
     "name": "FinalReactNativeApp",
     "slug": "FinalReactNativeApp",
     "version": "1.0.0",
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#232323",
+          "image": "./Components/Logo.png",
+          "dark": {
+            "image": "./Components/Logo.png",
+            "backgroundColor": "#000000"
+          },
+          "imageWidth": 200
+        }
+      ]
+    ],
     "extra": {
       "eas": {
         "projectId": "95fa63b4-1617-448b-a1e7-7f209de9b960"
