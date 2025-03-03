@@ -70,10 +70,9 @@ const Result = () => {
               align-items: baseline;
             "
           >
-            <h1 style="text-align: left; font-size: 20px; margin: 0;">Question</h1>
             <div 
               style="
-                border: 1px solid black; 
+                border: 1px solid #D0AC7B80; 
                 border-radius: 0px 20px 20px 20px;
                 padding: 5px 10px; 
                 text-align: justify; 
@@ -97,10 +96,9 @@ const Result = () => {
               align-items: baseline;
             "
           >
-            <h1 style="text-align: right; font-size: 20px; margin: 0;">Answer</h1>
             <div 
               style="
-                border: 1px solid black; 
+                border: 1px solid #D0AC7B80; 
                 border-radius: 20px 0px 20px 20px;
                 padding: 5px 10px; 
                 text-align: justify; 

@@ -1,4 +1,4 @@
-package com.finalreactnativeapp
+package com.muhammadsufian98.FinalReactNativeApp
 
 import android.app.Application
 import android.content.res.Configuration
