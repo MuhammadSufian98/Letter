@@ -72,10 +72,10 @@ const Result = () => {
           >
             <div 
               style="
-                border: 1px solid #D0AC7B80; 
-                border-radius: 0px 20px 20px 20px;
+                background-color: rgba(250, 231, 218); 
+                border-radius: 20px;
                 padding: 5px 10px; 
-                text-align: justify; 
+                text-align: left; 
                 flex: 1;
                 max-width: 400px;
                 width: 100%;
@@ -98,10 +98,10 @@ const Result = () => {
           >
             <div 
               style="
-                border: 1px solid #D0AC7B80; 
-                border-radius: 20px 0px 20px 20px;
+                background-color: rgba(243, 235, 224); 
+                border-radius: 20px;
                 padding: 5px 10px; 
-                text-align: justify; 
+                text-align: right; 
                 flex: 1;
                 max-width: 400px;
                 width: 100%;
