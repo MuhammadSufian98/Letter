@@ -1,12 +1,5 @@
 import React, { useContext, useCallback } from "react";
-import {
-  View,
-  StyleSheet,
-  Pressable,
-  ScrollView,
-  Image,
-  Text,
-} from "react-native";
+import { View, StyleSheet, Pressable, Image, Text } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { GlobalContext } from "../../context";
@@ -14,7 +7,7 @@ import { useNavigation, CommonActions } from "@react-navigation/native";
 import * as Print from "expo-print";
 
 const Result = () => {
-  const { Data } = useContext(GlobalContext);
+  const { Data, setData } = useContext(GlobalContext);
   const navigation = useNavigation();
 
   const html = `
@@ -123,6 +116,7 @@ const Result = () => {
   };
 
   const navigateToFrontPage = () => {
+    setData("");
     navigation.dispatch(
       CommonActions.reset({
         index: 0,
@@ -216,11 +210,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "400",
     color: "#00000",
-  },
-  text: {
-    fontSize: 18,
-    marginVertical: 5,
-    textAlign: "center",
   },
 });
 

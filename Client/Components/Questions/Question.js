@@ -82,6 +82,14 @@ const Question = () => {
                 <Text style={styles.NextBTN}>Ask</Text>
               </Pressable>
             </View>
+            <Pressable
+              onPress={() => {
+                navigation.navigate("Result");
+              }}
+              style={styles.ExitContainer}
+            >
+              <Text style={styles.ExitBTN}>Exit</Text>
+            </Pressable>
           </View>
         </View>
       </View>
@@ -184,6 +192,19 @@ const styles = StyleSheet.create({
     margin: 10,
     fontWeight: "400",
     color: "#FFFFFF",
+  },
+  ExitContainer: {
+    width: 140,
+    height: 57,
+    marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  ExitBTN: {
+    fontSize: 24,
+    textAlign: "center",
+    fontWeight: "400",
+    color: "#00000",
   },
 });
 
