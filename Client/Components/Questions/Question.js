@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f5fcff",
+    paddingBottom: 40,
   },
   imageContainer: {
     flexDirection: "column",
@@ -119,6 +120,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     height: "50%",
+    paddingBottom: 20,
   },
   headingOutter: {
     alignItems: "center",
@@ -132,11 +134,11 @@ const styles = StyleSheet.create({
   },
   InputContainer: {
     width: 321,
-    height: 300,
+    height: 250,
   },
   input: {
     width: "100%",
-    height: 252,
+    height: 200,
     borderColor: "#D0AC7B80",
     borderWidth: 1,
     borderRadius: 10,
@@ -153,6 +155,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
+    gap: 10,
     paddingBottom: 20,
   },
   TimeHeading: {
@@ -177,7 +180,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   NextContainer: {
-    position: "fixed",
     backgroundColor: "#D0AC7B",
     width: 240,
     height: 67,

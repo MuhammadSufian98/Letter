@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f5fcff",
+    paddingBottom: 30,
   },
   imageContainer: {
     flexDirection: "column",
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
   },
   headingOutter: {
     alignItems: "center",
+    height: "70%",
     gap: 30,
   },
   heading: {

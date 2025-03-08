@@ -26,7 +26,7 @@ const WelcomePage = () => {
     <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.innerContainer}>
         <Image source={require("../Logo.png")} style={styles.image} />
-        <Text style={styles.text}>W E L C O M E  T O</Text>
+        <Text style={styles.text}>W E L C O M E T O</Text>
         <Text style={styles.name}>SOLOMON’S</Text>
         <Text style={styles.text}>L E T T E R S</Text>
       </View>
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5FCFF",
     width: "100%",
     height: "100%",
+    paddingBottom: 30,
   },
   imageContainer: {
     flexDirection: "column",

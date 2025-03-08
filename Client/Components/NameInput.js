@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -9,17 +9,15 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+import { GlobalContext } from "../context";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
 const NameInput = () => {
-  const [name, setName] = useState({
-    firstName: "",
-    lastName: "",
-  });
   const [isFocused, setIsFocused] = useState(false);
   const navigation = useNavigation();
+  const { name, setName } = useContext(GlobalContext);
 
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../assets/Poppins-Regular_684471b5ff3c204b8d3b3da3bd4e082d.ttf"),
@@ -118,7 +116,7 @@ const styles = StyleSheet.create({
     height: 70,
   },
   InputContainer: {
-    height: "50%",
+    height: "43%",
     justifyContent: "flex-start",
     alignItems: "center",
     gap: 20,
@@ -155,6 +153,7 @@ const styles = StyleSheet.create({
     height: "20%",
     width: "100%",
     alignItems: "center",
+    paddingBottom: 40,
   },
   NextContainer: {
     width: 240,

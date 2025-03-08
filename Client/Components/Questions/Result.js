@@ -7,7 +7,7 @@ import { useNavigation, CommonActions } from "@react-navigation/native";
 import * as Print from "expo-print";
 
 const Result = () => {
-  const { Data, setData } = useContext(GlobalContext);
+  const { Data, setData, setName, setQuestionNo } = useContext(GlobalContext);
   const navigation = useNavigation();
 
   const html = `
@@ -69,9 +69,7 @@ const Result = () => {
                 border-radius: 20px;
                 padding: 5px 10px; 
                 text-align: left; 
-                flex: 1;
                 max-width: 400px;
-                width: 100%;
                 min-width: 20px;
               "
             >
@@ -95,9 +93,7 @@ const Result = () => {
                 border-radius: 20px;
                 padding: 5px 10px; 
                 text-align: right; 
-                flex: 1;
                 max-width: 400px;
-                width: 100%;
                min-width: 20px;
               "
             >
@@ -117,6 +113,8 @@ const Result = () => {
 
   const navigateToFrontPage = () => {
     setData("");
+    setName("");
+    setQuestionNo(1);
     navigation.dispatch(
       CommonActions.reset({
         index: 0,

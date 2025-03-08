@@ -9,6 +9,10 @@ export const GlobalProvider = ({ children }) => {
   const [seconds, setSeconds] = useState(0);
   const [QuestionNo, setQuestionNo] = useState(1);
   const [Data, setData] = useState([]);
+  const [name, setName] = useState({
+    firstName: "",
+    lastName: "",
+  });
 
   useEffect(() => {
     let timer;
@@ -47,6 +51,8 @@ export const GlobalProvider = ({ children }) => {
         setQuestionNo,
         Data,
         setData,
+        name,
+        setName,
       }}
     >
       {children}

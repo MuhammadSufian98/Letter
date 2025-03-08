@@ -6,15 +6,8 @@ import { GlobalContext } from "../../context";
 import { useNavigation } from "@react-navigation/native";
 
 const ShowAnswer = () => {
-  const {
-    QuestionNo,
-    setQuestionNo,
-    question,
-    answer,
-    setAnswer,
-    setQuestion,
-    setData,
-  } = useContext(GlobalContext);
+  const { QuestionNo, question, answer, setAnswer, setQuestion, setData } =
+    useContext(GlobalContext);
   const navigation = useNavigation();
 
   const handleContinue = () => {
@@ -71,6 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF",
+    paddingBottom: 30,
   },
   imageContainer: {
     flexDirection: "column",

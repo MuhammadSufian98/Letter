@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f5fcff",
+    paddingBottom: 30,
   },
   imageContainer: {
     flexDirection: "column",

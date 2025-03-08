@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f5fcff",
+    paddingBottom: 40,
   },
   imageContainer: {
     flexDirection: "column",
@@ -116,6 +117,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: "50%",
+    paddingBottom: 20,
   },
   headingOutter: {
     alignItems: "center",
@@ -129,11 +131,11 @@ const styles = StyleSheet.create({
   },
   InputContainer: {
     width: 321,
-    height: 280,
+    height: 250,
   },
   input: {
     width: "100%",
-    height: 252,
+    height: 200,
     borderColor: "#D0AC7B80",
     borderWidth: 1,
     borderRadius: 10,

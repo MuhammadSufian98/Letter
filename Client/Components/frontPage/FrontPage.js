@@ -46,28 +46,11 @@ const FrontPage = () => {
             <Text style={styles.text}>English</Text>
           </Pressable>
         </View>
-
-        <View
-          style={[
-            styles.innerLang,
-            selected === "Español" && styles.selectedBorder,
-          ]}
-        >
-          <Pressable
-            style={styles.langContainer}
-            onPress={() => setSelected("Español")}
-          >
-            <Image source={require("./world.png")} style={styles.langImage} />
-            <Text style={styles.text}>Español</Text>
-          </Pressable>
-        </View>
       </View>
       <View style={styles.NextOutter}>
         <View
           style={
-            selected === "Español" || selected === "English"
-              ? styles.NextContainer
-              : { display: "none" }
+            selected === "English" ? styles.NextContainer : { display: "none" }
           }
         >
           <Pressable onPress={() => navigation.navigate("WelcomePage")}>
@@ -86,6 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF",
+    paddingBottom: 30,
   },
   text: {
     fontSize: 24,

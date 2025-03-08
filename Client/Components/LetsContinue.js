@@ -8,14 +8,13 @@ import {
   BackHandler,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { GlobalContext } from "../context";
 
 const LetsContinue = () => {
   const navigation = useNavigation();
-  const { setQuestionNo, Data } = useContext(GlobalContext);
+  const { setQuestionNo, Data, name } = useContext(GlobalContext);
 
   useEffect(() => {
     const backAction = () => {
@@ -30,24 +29,12 @@ const LetsContinue = () => {
     return () => backHandler.remove();
   }, []);
 
-  async function postData() {
-    try {
-      console.log(Data);
-      const response = await axios.post("http://localhost:3000/submit", Data);
-      console.log("Data sent successfully:", response.data);
-    } catch (error) {
-      console.error("Error sending data:", error);
-    }
-  }
-
   const handleNext = () => {
     setQuestionNo((prev) => prev + 1);
 
     navigation.navigate("Question");
   };
   const handleExit = () => {
-    postData();
-
     setQuestionNo(1);
     navigation.navigate("Result");
   };
@@ -78,7 +65,8 @@ const LetsContinue = () => {
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.text}>
-            Please pass the phone to Michelle. She will ask the second question.
+            Please pass the phone to {name.firstName} {name.lastName}. He/She
+            will ask the next question.
           </Text>
         </View>
       </View>
@@ -105,6 +93,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f5fcff",
+    paddingBottom: 30,
   },
   imageContainer: {
     flexDirection: "column",
