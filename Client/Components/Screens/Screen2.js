@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     height: 324,
   },
   text: {
+    fontFamily: "Poppins-Regular",
     fontSize: 18,
     fontWeight: "400",
     textAlign: "center",
@@ -105,8 +106,8 @@ const styles = StyleSheet.create({
   },
   NextContainer: {
     backgroundColor: "#D0AC7B",
-    width: 240,
-    height: 67,
+    width: 220,
+    height: 60,
     marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",

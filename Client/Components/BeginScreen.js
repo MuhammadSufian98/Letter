@@ -1,10 +1,13 @@
-import React, { useCallback } from "react";
+import React, { useContext, useCallback } from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts } from "expo-font";
+import { GlobalContext } from "../context";
 import * as SplashScreen from "expo-splash-screen";
+
 const BeginScreen = () => {
   const navigation = useNavigation();
+  const { name } = useContext(GlobalContext);
 
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../assets/Poppins-Regular_684471b5ff3c204b8d3b3da3bd4e082d.ttf"),
@@ -32,7 +35,8 @@ const BeginScreen = () => {
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.text}>
-            Please pass the phone to Solomon. He will ask the first question.
+            Please pass the phone to {name.firstName} {name.lastName}. He/She
+            will ask the first question.
           </Text>
         </View>
       </View>
@@ -86,7 +90,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    fontWeight: "400",
+    fontFamily: "Poppins-Regular",
     textAlign: "center",
     margin: 10,
     lineHeight: 27,
@@ -101,14 +105,15 @@ const styles = StyleSheet.create({
   },
   NextContainer: {
     backgroundColor: "#D0AC7B",
-    width: 240,
-    height: 67,
+    width: 220,
+    height: 60,
     marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "bottom",
   },
   NextBTN: {
+    fontFamily: "Poppins-Regular",
     fontSize: 24,
     textAlign: "center",
     margin: 10,

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useCallback } from "react";
+import React, { useContext, useEffect, useCallback, useState } from "react";
 import {
   View,
   Pressable,
@@ -18,6 +18,8 @@ const Answer = () => {
   const { answer, setAnswer, seconds, stopTimer, QuestionNo } =
     useContext(GlobalContext);
   const navigation = useNavigation();
+  const [Fill, setFill] = useState(false);
+
   useEffect(() => {
     if (seconds === 0) {
       stopTimer();
@@ -61,10 +63,16 @@ const Answer = () => {
               <Text style={styles.heading}>ANSWER #{QuestionNo}</Text>
               <View style={styles.InputContainer}>
                 <TextInput
-                  style={styles.input}
+                  style={[
+                    styles.input,
+                    !Fill ? styles.goldBorder : styles.redBorder,
+                  ]}
                   placeholder="ANSWER"
                   value={answer}
-                  onChangeText={setAnswer}
+                  onChangeText={(text) => {
+                    setAnswer(text);
+                    setFill(false);
+                  }}
                   multiline={true}
                 />
               </View>
@@ -78,6 +86,9 @@ const Answer = () => {
             <View style={styles.SubmitContainer}>
               <Pressable
                 onPress={() => {
+                  if (!answer) {
+                    setFill(true);
+                  }
                   if (answer) {
                     stopTimer();
                     navigation.navigate("ShowAnswer");
@@ -116,44 +127,43 @@ const styles = StyleSheet.create({
     width: 321,
     justifyContent: "center",
     alignItems: "center",
-    height: "50%",
-    paddingBottom: 20,
+    height: "45%",
   },
   headingOutter: {
     alignItems: "center",
-    gap: 30,
   },
   heading: {
+    paddingBottom: 50,
     fontFamily: "Aboreto-Regular",
-    fontSize: 36,
-    fontWeight: "400",
-    lineHeight: 41.76,
+    fontSize: 24,
   },
   InputContainer: {
     width: 321,
     height: 250,
   },
   input: {
+    fontFamily: "Poppins-Regular",
     width: "100%",
-    height: 200,
-    borderColor: "#D0AC7B80",
+    height: 150,
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 10,
-    fontSize: 24,
-    fontWeight: "400",
-    lineHeight: 36,
+    fontSize: 16,
     color: "#D0AC7B",
-    textAlign: "justify",
     textAlignVertical: "top",
-    overflow: "hidden",
   },
-
+  goldBorder: {
+    borderColor: "#D0AC7B",
+  },
+  redBorder: {
+    borderColor: "#ff0f0f",
+  },
   timerContainer: {
     width: "100%",
-    height: "30%",
+    height: "40%",
     justifyContent: "center",
     alignItems: "center",
+    paddingBottom: 80,
   },
   TimerHeading: {
     fontFamily: "Aboreto-Regular",
@@ -161,7 +171,8 @@ const styles = StyleSheet.create({
     fontWeight: "200",
   },
   timer: {
-    fontSize: 38,
+    fontFamily: "Poppins-Regular",
+    fontSize: 20,
   },
   SubmitOutter: {
     position: "static",
@@ -172,14 +183,15 @@ const styles = StyleSheet.create({
   },
   SubmitContainer: {
     backgroundColor: "#D0AC7B",
-    width: 240,
-    height: 67,
+    width: 220,
+    height: 60,
     marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "bottom",
   },
   SubmitBTN: {
+    fontFamily: "Poppins-Regular",
     fontSize: 24,
     textAlign: "center",
     margin: 10,

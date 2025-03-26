@@ -5,70 +5,121 @@ import * as SplashScreen from "expo-splash-screen";
 import { GlobalContext } from "../../context";
 import { useNavigation, CommonActions } from "@react-navigation/native";
 import * as Print from "expo-print";
+import * as FileSystem from "expo-file-system";
+import { Asset } from "expo-asset";
 
 const Result = () => {
-  const { Data, setData, setName, setQuestionNo } = useContext(GlobalContext);
+  const { Data, setData, name, setName, setQuestionNo } =
+    useContext(GlobalContext);
   const navigation = useNavigation();
 
-  const html = `
-  <html>
+  const getBase64Image = async (imageAsset) => {
+    const asset = Asset.fromModule(imageAsset);
+    await asset.downloadAsync();
+
+    const fileUri = asset.localUri;
+    if (!fileUri) {
+      throw new Error("Failed to load image asset");
+    }
+
+    return await FileSystem.readAsStringAsync(fileUri, { encoding: "base64" });
+  };
+
+  const getBase64Font = async (fontAsset) => {
+    const asset = Asset.fromModule(fontAsset);
+    await asset.downloadAsync();
+    const fileUri = asset.localUri;
+    if (!fileUri) {
+      throw new Error("Failed to load font asset");
+    }
+
+    return await FileSystem.readAsStringAsync(fileUri, { encoding: "base64" });
+  };
+
+  const print = async () => {
+    const imageBase64 = await getBase64Image(require("../../assets/Logo.png"));
+    const fontBase64 = await getBase64Font(
+      require("../../assets/Poppins-Regular_684471b5ff3c204b8d3b3da3bd4e082d.ttf")
+    );
+    const html = `
+    <html>
     <head>
-      <meta 
-        name="viewport" 
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" 
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
       />
       <style>
-        @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
-  
         @page {
           size: A4;
           margin: 65px;
         }
-        
+        @font-face {
+          font-family: 'Poppins-Regular';
+          src: url('data:font/ttf;base64,${fontBase64}') format('truetype');
+        }
         body {
           width: 794px;
           height: 1123px;
           margin: 0 auto;
-          font-family: "Poppins", sans-serif;
+          font-family: "Poppins-Regular", sans-serif;
           text-align: center;
         }
       </style>
     </head>
     <body>
-      <div 
+      <div
         style="
-          display: flex; 
-          justify-content: center; 
-          align-items: center; 
-          height: 150px; 
-          gap: 10px;
+          background: #fff;
+          font-size: 24px;
+          line-height: 30px;
+  
+          padding: 40px;
+          box-shadow: inset #a9855f 0 0 0 5px, inset #c7a074 0 0 0 1px,
+            inset #d0ac7b 0 0 0 10px, inset #e3c59a 0 0 0 11px,
+            inset #f2dab5 0 0 0 16px, inset #fae8cd 0 0 0 17px,
+            inset #fff7e5 0 0 0 21px, inset #fff3db 0 0 0 22px;
+          text-shadow: 3px 3px 1px #e3c59a;
         "
       >
-        <img 
-          src="https://s3-alpha-sig.figma.com/img/0bd8/7aa2/328ab591fd9929ccb2eac57dafde36f0?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ajH1nfCNb9~cLjc1cQ9sw4ESaQWfaD6aL591NYtF3ALZDId4wPZIi~EzzaQySIqFxxDmPe3884AjfsxK~c0r3WocqHbUq-ewqBuDINs1WJGjBjlKxvz7yicJLKY1mT02IscNVl-bG~KhyPYa6A53q8mR57TXThlW4FM4m8X68Uef6k9onR4zqp2F6y~hE8Ane6xPGG2g93zXeeg3EBtD9g-UoCd-RTMm7UmU6-2Go9~JUV2Bw6CiNtxt-3EU8lIqSj9wpQb3WgInIDDREbQJTw3HdIT94YNutWerv42YfJTfTv3YgwmOal1WtWojtPBf4PjT7P5u6rYRAR6SvTYoVg__" 
-          alt="Logo" 
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+            gap: 10px;
+          "
+        >
+          <img
+          src="data:image/png;base64,${imageBase64}"
+          alt="Logo"
           width="400px"
-        />
-      </div>
-            
-      <div style="padding: 30px;">
-        ${Data.map(
-          (item) => `
-          <div 
+          />
+        </div>
+          <hr style="
+            border: none;
+            height: 2px;
+            background-color: #d0ac7b;
+            margin: 20px auto;
+          "
+          />
+        <div style="padding: 30px">
+          ${Data.map(
+            (item) => `
+          <div
             style="
-              display: flex; 
-              gap: 20px; 
-              align-items: flex-start; 
+              display: flex;
+              gap: 20px;
               margin-bottom: 20px;
               align-items: baseline;
             "
           >
-            <div 
+            <div
               style="
-                background-color: rgba(250, 231, 218); 
+                background-color: rgba(250, 231, 218);
                 border-radius: 20px;
-                padding: 5px 10px; 
-                text-align: left; 
+                padding: 5px 10px;
+                text-align: left;
                 max-width: 400px;
                 min-width: 20px;
               "
@@ -77,43 +128,46 @@ const Result = () => {
             </div>
           </div>
   
-          <div 
+          <div
             style="
-              display: flex; 
-              flex-direction: row-reverse; 
-              gap: 20px; 
-              align-items: flex-start; 
+              display: flex;
+              flex-direction: row-reverse;
+              gap: 20px;
+              align-items: flex-start;
               margin-bottom: 20px;
               align-items: baseline;
             "
           >
-            <div 
+            <div
               style="
-                background-color: rgba(243, 235, 224); 
+                background-color: rgba(243, 235, 224);
                 border-radius: 20px;
-                padding: 5px 10px; 
-                text-align: right; 
+                padding: 5px 10px;
+                text-align: right;
                 max-width: 400px;
-               min-width: 20px;
+                min-width: 20px;
               "
             >
               ${item.Answer}
             </div>
           </div>
           `
-        ).join("")}
+          ).join("")}
+        </div>
       </div>
     </body>
   </html>
-  `;
-
-  const print = async () => {
+    `;
     await Print.printAsync({ html });
   };
 
   const navigateToFrontPage = () => {
-    setData("");
-    setName("");
+    setData([]);
+    setName({
+      firstName: "",
+      lastName: "",
+    });
+    console.log(name);
     setQuestionNo(1);
     navigation.dispatch(
       CommonActions.reset({
@@ -141,12 +195,7 @@ const Result = () => {
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <View style={styles.logoContainer}>
-        <Image
-          source={{
-            uri: "https://s3-alpha-sig.figma.com/img/0bd8/7aa2/328ab591fd9929ccb2eac57dafde36f0?Expires=1741564800&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ajH1nfCNb9~cLjc1cQ9sw4ESaQWfaD6aL591NYtF3ALZDId4wPZIi~EzzaQySIqFxxDmPe3884AjfsxK~c0r3WocqHbUq-ewqBuDINs1WJGjBjlKxvz7yicJLKY1mT02IscNVl-bG~KhyPYa6A53q8mR57TXThlW4FM4m8X68Uef6k9onR4zqp2F6y~hE8Ane6xPGG2g93zXeeg3EBtD9g-UoCd-RTMm7UmU6-2Go9~JUV2Bw6CiNtxt-3EU8lIqSj9wpQb3WgInIDDREbQJTw3HdIT94YNutWerv42YfJTfTv3YgwmOal1WtWojtPBf4PjT7P5u6rYRAR6SvTYoVg__",
-          }}
-          style={styles.logo}
-        />
+        <Image source={require("../../assets/Logo.png")} style={styles.logo} />
       </View>
       <View style={styles.BTNs}>
         <Pressable onPress={print} style={styles.DownloadContainer}>
@@ -174,8 +223,8 @@ const styles = StyleSheet.create({
     height: 150,
   },
   logo: {
-    width: 200,
-    height: 100,
+    width: 300,
+    height: 1000,
     resizeMode: "contain",
   },
   BTNs: {
@@ -184,13 +233,14 @@ const styles = StyleSheet.create({
   },
   DownloadContainer: {
     backgroundColor: "#D0AC7B",
-    width: 200,
-    height: 57,
+    width: 220,
+    height: 60,
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
   },
   DownloadBTN: {
+    fontFamily: "Poppins-Regular",
     fontSize: 24,
     textAlign: "center",
     fontWeight: "400",
@@ -204,10 +254,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   ExitBTN: {
-    fontSize: 24,
+    fontFamily: "Poppins-Regular",
+    fontSize: 18,
     textAlign: "center",
     fontWeight: "400",
-    color: "#00000",
+    color: "#000000",
   },
 });
 

@@ -19,8 +19,16 @@ const Question = () => {
   const { question, setQuestion, QuestionNo, startTimer } =
     useContext(GlobalContext);
   const [minutes, setMinutes] = useState("");
+  const [Fill, setFill] = useState(false);
+  const [TimerFilled, setTimerFilled] = useState(false);
 
   const handleAsk = () => {
+    if (!question) {
+      setFill(true);
+    }
+    if (!minutes) {
+      setTimerFilled(true);
+    }
     if (!isNaN(minutes) && minutes > 0 && question) {
       startTimer(Number(minutes));
       navigation.navigate("QuestionAsked");
@@ -53,27 +61,39 @@ const Question = () => {
             <Image source={require("../Logo.png")} style={styles.image} />
           </View>
           <View style={styles.askQuestion}>
-            <View style={styles.headingOutter}>
-              <Text style={styles.heading}>QUESTION #{QuestionNo}</Text>
-            </View>
-            <View style={styles.InputContainer}>
-              <TextInput
-                style={styles.input}
-                placeholder="What is your question?"
-                value={question}
-                onChangeText={setQuestion}
-                multiline={true}
-              />
-            </View>
-            <View style={styles.InputTimerContainer}>
-              <Text style={styles.TimeHeading}>SET TIMER</Text>
-              <TextInput
-                style={styles.inputTimer}
-                placeholder="Enter minutes"
-                keyboardType="numeric"
-                value={minutes}
-                onChangeText={setMinutes}
-              />
+            <Text style={styles.heading}>QUESTION #{QuestionNo}</Text>
+            <View style={styles.questionContainer}>
+              <View style={styles.InputContainer}>
+                <TextInput
+                  style={[
+                    styles.input,
+                    !Fill ? styles.goldBorder : styles.redBorder,
+                  ]}
+                  placeholder="What is your question?"
+                  value={question}
+                  onChangeText={(text) => {
+                    setQuestion(text);
+                    setFill(false);
+                  }}
+                  multiline={true}
+                />
+              </View>
+              <View style={styles.InputTimerContainer}>
+                <Text style={styles.TimeHeading}>SET TIMER</Text>
+                <TextInput
+                  style={[
+                    styles.inputTimer,
+                    !TimerFilled ? styles.goldBorder : styles.redBorder,
+                  ]}
+                  placeholder="Enter minutes"
+                  keyboardType="numeric"
+                  value={minutes}
+                  onChangeText={(text) => {
+                    setMinutes(text);
+                    setTimerFilled(false);
+                  }}
+                />
+              </View>
             </View>
           </View>
           <View style={styles.NextOutter}>
@@ -119,40 +139,40 @@ const styles = StyleSheet.create({
     width: 321,
     justifyContent: "space-between",
     alignItems: "center",
-    height: "50%",
-    paddingBottom: 20,
+    height: "45%",
   },
-  headingOutter: {
-    alignItems: "center",
-  },
+
   heading: {
     fontFamily: "Aboreto-Regular",
-    fontSize: 36,
-    fontWeight: "400",
-    lineHeight: 41.76,
-    paddingBottom: 10,
+    fontSize: 24,
+  },
+  questionContainer: {
+    alignItems: "center",
+    gap: 0,
   },
   InputContainer: {
     width: 321,
-    height: 250,
+    height: 220,
   },
   input: {
     width: "100%",
-    height: 200,
-    borderColor: "#D0AC7B80",
+    height: 150,
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 10,
-    fontSize: 24,
-    fontWeight: "400",
-    lineHeight: 36,
+    paddingVertical: 10,
+    fontSize: 16,
+    fontFamily: "Poppins-Regular",
     color: "#D0AC7B",
-    textAlign: "justify",
     textAlignVertical: "top",
-    overflow: "hidden",
+  },
+  goldBorder: {
+    borderColor: "#D0AC7B80",
+  },
+  redBorder: {
+    borderColor: "#ff0f0f80",
   },
   InputTimerContainer: {
-    justifyContent: "center",
     alignItems: "center",
     width: "100%",
     gap: 10,
@@ -160,35 +180,35 @@ const styles = StyleSheet.create({
   },
   TimeHeading: {
     fontFamily: "Aboreto-Regular",
-    fontSize: 20,
+    fontSize: 16,
   },
   inputTimer: {
-    width: 200,
+    width: 190,
     height: 40,
-    borderColor: "#D0AC7B80",
     borderWidth: 1,
     borderRadius: 10,
-    fontSize: 15,
-    fontWeight: "400",
+    fontSize: 14,
+    fontFamily: "Poppins-Regular",
     color: "#D0AC7B",
     textAlign: "center",
+    paddingVertical: 0,
   },
   NextOutter: {
     height: "20%",
-    bottom: 0,
     width: "100%",
     alignItems: "center",
   },
   NextContainer: {
     backgroundColor: "#D0AC7B",
-    width: 240,
-    height: 67,
+    width: 220,
+    height: 60,
     marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "bottom",
   },
   NextBTN: {
+    fontFamily: "Poppins-Regular",
     fontSize: 24,
     textAlign: "center",
     margin: 10,
@@ -203,9 +223,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   ExitBTN: {
-    fontSize: 24,
+    fontFamily: "Poppins-Regular",
+    fontSize: 18,
     textAlign: "center",
-    fontWeight: "400",
     color: "#00000",
   },
 });

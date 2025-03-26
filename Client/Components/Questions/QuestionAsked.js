@@ -1,5 +1,12 @@
 import React, { useContext, useCallback } from "react";
-import { View, Pressable, Image, StyleSheet, Text } from "react-native";
+import {
+  ScrollView,
+  View,
+  Pressable,
+  Image,
+  StyleSheet,
+  Text,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -39,9 +46,15 @@ const QuestionAsked = () => {
         <View style={styles.headingOutter}>
           <Text style={styles.heading}>QUESTION #{QuestionNo}</Text>
           <View style={styles.QuestionContainer}>
-            <Text style={styles.Question}>
-              {question || "What is your question?"}
-            </Text>
+            <ScrollView
+              style={styles.scrollView}
+              showsVerticalScrollIndicator={true}
+              nestedScrollEnabled={true}
+            >
+              <Text style={styles.Question}>
+                {question || "What is your question?"}
+              </Text>
+            </ScrollView>
           </View>
         </View>
         <View style={styles.timerContainer}>
@@ -86,8 +99,7 @@ const styles = StyleSheet.create({
     width: 321,
     justifyContent: "center",
     alignItems: "center",
-    height: "50%",
-    gap: 40,
+    height: "45%",
   },
   headingOutter: {
     alignItems: "center",
@@ -96,22 +108,28 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontFamily: "Aboreto-Regular",
-    fontSize: 36,
+    fontSize: 24,
     fontWeight: "400",
     lineHeight: 41.76,
   },
-  QuestionContainer: { width: 240, height: "30%" },
+  QuestionContainer: {
+    width: 240,
+    height: 150,
+  },
+
+  scrollView: {
+    width: "100%",
+  },
 
   Question: {
-    fontSize: 24,
-    fontWeight: "400",
+    fontFamily: "Poppins-Regular",
+    fontSize: 16,
     lineHeight: 36,
     color: "#D0AC7B",
     textAlign: "center",
     width: 240,
-    height: 144,
-    justifyContent: "center",
   },
+
   timerContainer: {
     width: "100%",
     height: "30%",
@@ -124,29 +142,30 @@ const styles = StyleSheet.create({
     fontWeight: "200",
   },
   timer: {
-    fontSize: 38,
+    fontFamily: "Poppins-Regular",
+    fontSize: 24,
   },
   RespondOutter: {
     position: "static",
     height: "20%",
-    bottom: 0,
     width: "100%",
     alignItems: "center",
+    paddingBottom: 175,
   },
   RespondContainer: {
     backgroundColor: "#D0AC7B",
-    width: 240,
-    height: 67,
+    width: 220,
+    height: 60,
     marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "bottom",
   },
   RespondBTN: {
+    fontFamily: "Poppins-Regular",
     fontSize: 24,
     textAlign: "center",
     margin: 10,
-    fontWeight: "400",
     color: "#FFFFFF",
   },
 });

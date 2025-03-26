@@ -16,6 +16,11 @@ import * as SplashScreen from "expo-splash-screen";
 
 const NameInput = () => {
   const [isFocused, setIsFocused] = useState(false);
+  const [selection, setSelection] = useState({
+    firstSelection: { start: 0, end: 0 },
+    secondSelection: { start: 0, end: 0 },
+  });
+
   const navigation = useNavigation();
   const { name, setName } = useContext(GlobalContext);
 
@@ -39,7 +44,7 @@ const NameInput = () => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={{ flex: 1 }}
     >
-      <View style={{ height: 825, justifyContent: "center" }}>
+      <View style={{ height: 830, justifyContent: "center" }}>
         <View style={styles.container} onLayout={onLayoutRootView}>
           <View style={styles.imageContainer}>
             <Image source={require("./Logo.png")} style={styles.image} />
@@ -48,27 +53,28 @@ const NameInput = () => {
             <View style={styles.headingOutter}>
               <Text style={styles.heading}>What is your name</Text>
             </View>
-            <TextInput
-              style={styles.input}
-              placeholder="FIRST NAME"
-              placeholderTextColor="#D0AC7B80"
-              value={name.firstName}
-              onChangeText={(text) =>
-                setName((prev) => ({ ...prev, firstName: text }))
-              }
-            />
-
-            <TextInput
-              style={[styles.input, isFocused && styles.inputFocused]}
-              placeholder="LAST NAME"
-              placeholderTextColor="#D0AC7B80"
-              value={name.lastName}
-              onChangeText={(text) =>
-                setName((prev) => ({ ...prev, lastName: text }))
-              }
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-            />
+            <View style={styles.gap}>
+              <TextInput
+                style={styles.input}
+                placeholder="FIRST NAME"
+                placeholderTextColor="#D0AC7B80"
+                value={name.firstName}
+                onChangeText={(text) =>
+                  setName((prev) => ({ ...prev, firstName: text }))
+                }
+              />
+              <TextInput
+                style={[styles.input, isFocused && styles.inputFocused]}
+                placeholder="LAST NAME"
+                placeholderTextColor="#D0AC7B80"
+                value={name.lastName}
+                onChangeText={(text) =>
+                  setName((prev) => ({ ...prev, lastName: text }))
+                }
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+              />
+            </View>
 
             {!name.firstName.trim() && (
               <Text style={styles.warningText}>
@@ -83,7 +89,7 @@ const NameInput = () => {
                 disabled={!name.firstName.trim()}
                 style={({ pressed }) => [
                   styles.NextBTNContainer,
-                  !name.firstName.trim() && styles.disabledBTN,
+                  !name.firstName && styles.disabledBTN,
                   pressed && styles.pressedBTN,
                 ]}
               >
@@ -119,15 +125,16 @@ const styles = StyleSheet.create({
     height: "43%",
     justifyContent: "flex-start",
     alignItems: "center",
-    gap: 20,
   },
   headingOutter: { width: 241, height: 84 },
   heading: {
     fontFamily: "Aboreto-Regular",
-    fontSize: 24,
+    fontSize: 20,
     textAlign: "center",
     margin: 10,
-    fontWeight: "400",
+  },
+  gap: {
+    gap: 10,
   },
   input: {
     height: 40,
@@ -135,18 +142,20 @@ const styles = StyleSheet.create({
     borderColor: "#D0AC7B80",
     borderWidth: 1,
     borderRadius: 10,
-    paddingHorizontal: 10,
     fontSize: 16,
+    fontFamily: "Poppins-Regular",
     textAlign: "center",
     color: "#D0AC7B",
+    paddingVertical: 0,
   },
   inputFocused: {
     borderColor: "#D0AC7B",
   },
   warningText: {
+    fontFamily: "Poppins-Regular",
     color: "red",
-    fontSize: 14,
-    marginTop: 5,
+    fontSize: 16,
+    marginTop: 10,
   },
 
   NextOutter: {
@@ -156,8 +165,8 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   NextContainer: {
-    width: 240,
-    height: 67,
+    width: 220,
+    height: 60,
     marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",
@@ -173,7 +182,7 @@ const styles = StyleSheet.create({
   },
   NextBTN: {
     fontSize: 24,
-    fontWeight: "400",
+    fontFamily: "Poppins-Regular",
     color: "#FFFFFF",
   },
   disabledBTN: {

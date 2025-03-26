@@ -1,5 +1,12 @@
 import React, { useContext, useCallback } from "react";
-import { View, StyleSheet, Pressable, Image, Text } from "react-native";
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  Pressable,
+  Image,
+  Text,
+} from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { GlobalContext } from "../../context";
@@ -43,7 +50,13 @@ const ShowAnswer = () => {
           <Text style={styles.heading}>ANSWER #{QuestionNo}</Text>
         </View>
         <View style={styles.AnswerContainer}>
-          <Text style={styles.ShowAnswer}>{answer}</Text>
+          <ScrollView
+            style={styles.scrollView}
+            showsVerticalScrollIndicator={true}
+            nestedScrollEnabled={true}
+          >
+            <Text style={styles.ShowAnswer}>{answer}</Text>
+          </ScrollView>
         </View>
       </View>
       <View style={styles.ContinueOutter}>
@@ -87,21 +100,22 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontFamily: "Aboreto-Regular",
-    fontSize: 36,
+    fontSize: 24,
     fontWeight: "400",
     lineHeight: 41.76,
   },
   AnswerContainer: { width: 240, height: "60%" },
-
+  scrollView: {
+    width: "100%",
+  },
   ShowAnswer: {
-    fontSize: 24,
-    fontWeight: "400",
+    fontSize: 16,
+    fontFamily: "Poppins-Regular",
     lineHeight: 36,
     color: "#D0AC7B",
     textAlign: "center",
     width: 240,
     height: 144,
-    justifyContent: "center",
   },
   ContinueOutter: {
     position: "static",
@@ -112,8 +126,8 @@ const styles = StyleSheet.create({
   },
   ContinueContainer: {
     backgroundColor: "#D0AC7B",
-    width: 240,
-    height: 67,
+    width: 220,
+    height: 60,
     marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",

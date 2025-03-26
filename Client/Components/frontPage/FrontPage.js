@@ -10,6 +10,7 @@ const FrontPage = () => {
 
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../../assets/Poppins-Regular_684471b5ff3c204b8d3b3da3bd4e082d.ttf"),
+    "Poppins-Medium": require("../../assets/Poppins-Medium.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -29,6 +30,7 @@ const FrontPage = () => {
       </View>
 
       <View style={styles.lang}>
+        <Text style={[styles.text, styles.medium]}>Choose language</Text>
         <View
           style={[
             styles.innerLang,
@@ -44,6 +46,18 @@ const FrontPage = () => {
               style={styles.langImage}
             />
             <Text style={styles.text}>English</Text>
+          </Pressable>
+        </View>
+        <View style={[styles.innerLang]}>
+          <Pressable
+            style={styles.langContainer}
+            onPress={() => setSelected("None")}
+          >
+            <Image
+              source={require("./world-modified.png")}
+              style={styles.langImage}
+            />
+            <Text style={styles.GreyClr}>Español</Text>
           </Pressable>
         </View>
       </View>
@@ -72,11 +86,22 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
   text: {
+    fontFamily: "Poppins-Regular",
+    fontSize: 18,
+    textAlign: "center",
+    margin: 10,
+    color: "#D0AC7B",
+  },
+  medium: {
+    fontFamily: "Poppins-Medium",
     fontSize: 24,
+  },
+  GreyClr: {
+    fontSize: 18,
     textAlign: "center",
     margin: 10,
     fontWeight: "400",
-    color: "#D0AC7B",
+    color: "#4C4C4C",
   },
   imageContainer: {
     flexDirection: "column",
@@ -101,7 +126,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderWidth: 1,
     borderColor: "transparent",
-    width: 219,
+    width: 200,
     height: 70,
   },
   selectedBorder: {
@@ -127,8 +152,9 @@ const styles = StyleSheet.create({
   },
   NextContainer: {
     backgroundColor: "#D0AC7B",
-    width: 240,
-    height: 67,
+    minWidth: 200,
+    width: 220,
+    height: 60,
     marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",

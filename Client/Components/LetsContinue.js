@@ -14,7 +14,7 @@ import { GlobalContext } from "../context";
 
 const LetsContinue = () => {
   const navigation = useNavigation();
-  const { setQuestionNo, Data, name } = useContext(GlobalContext);
+  const { setQuestionNo, name } = useContext(GlobalContext);
 
   useEffect(() => {
     const backAction = () => {
@@ -124,8 +124,8 @@ const styles = StyleSheet.create({
     height: 160,
   },
   text: {
+    fontFamily: "Poppins-Regular",
     fontSize: 18,
-    fontWeight: "400",
     textAlign: "center",
     margin: 10,
     lineHeight: 27,
@@ -141,14 +141,15 @@ const styles = StyleSheet.create({
   },
   NextContainer: {
     backgroundColor: "#D0AC7B",
-    width: 240,
-    height: 67,
+    width: 220,
+    height: 60,
     marginTop: 10,
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "bottom",
   },
   NextBTN: {
+    fontFamily: "Poppins-Regular",
     fontSize: 24,
     textAlign: "center",
     margin: 10,
